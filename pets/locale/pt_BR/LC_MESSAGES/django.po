@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-06 22:23-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: João Luiz Lorencetti <me@dirtycoder.net>, 2016\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/cade-meu-bicho/"
+"teams/69260/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/_layouts/base.html:8
+msgid "Missing and for adoption pets"
+msgstr "Pets desaparecidos e para adoção"
+
+#: templates/_layouts/base.html:43
+msgid "Toggle navigation"
+msgstr "Alternar navegação"
+
+#: templates/_layouts/base.html:54
+msgid "Pets"
+msgstr "Pets"
+
+#: templates/_layouts/base.html:76
+msgid "Register Pet"
+msgstr "Cadastrar Pet"
+
+#: templates/_layouts/base.html:78
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/_layouts/base.html:79
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/_layouts/base.html:81
+msgid "Create Account"
+msgstr "Criar Conta"
+
+#: templates/_layouts/base.html:82
+msgid "Login"
+msgstr "Login"
+
+#: templates/_layouts/base.html:84 templates/_layouts/base.html:162
+msgid "About"
+msgstr "Sobre"
+
+#: templates/_layouts/base.html:85
+msgid "Search"
+msgstr "Pesquisar"
+
+#: templates/_layouts/base.html:152
+msgid "Made with &hearts; in Araras, São Paulo"
+msgstr "Feito com &hearts; em Araras, São Paulo"
+
+#: templates/_layouts/base.html:164
+msgid ""
+"The purpose of Cadê meu Bicho is to provide the encounter between the best "
+"or future best friends. :)"
+msgstr ""
+"O objetivo do Cadê meu Bicho é proporcionar o encontro entre os melhores ou "
+"futuro melhores amigos. :)"
+
+#: templates/_layouts/base.html:167
+msgid "Contact"
+msgstr "Contato"
+
+#: templates/_partials/pet_card.html:18
+msgid "Details"
+msgstr "Detalhes"
+
+#: templates/_partials/pets_list.html:17
+msgid "Previous"
+msgstr "Anterior"
+
+#: templates/_partials/pets_list.html:29
+msgid "Next"
+msgstr "Próxima"
+
+#: templates/_partials/pets_list.html:38
+msgid "No friends in this category yet :)"
+msgstr "Nenhum amiguinho nessa categoria ainda. :)"

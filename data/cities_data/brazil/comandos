@@ -1,0 +1,8 @@
+COPY cities_state("code", "abbr", "name") FROM '/home/omar/dalelapata/pets/data/cities_data/brazil/states.csv' DELIMITER ',' CSV HEADER;
+
+COPY cities_city(code,name,state,lon,lat) FROM '/home/omar/dalelapata/pets/data/cities_data/brazil/cities.csv' DELIMITER ',' CSV HEADER;
+
+exportar
+COPY (SELECT word, def FROM t_words) TO 'file.csv' CSV;
+
+

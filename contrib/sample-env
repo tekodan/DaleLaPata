@@ -1,0 +1,8 @@
+ALLOWED_HOSTS=127.0.0.1,.localhost
+DATABASE_URL=postgres://postgres:password@127.0.0.1:5432/pets
+DB_CONN_MAX_AGE=0
+DEBUG=True
+DJANGO_SETTINGS_MODULE=pets.settings.prod
+INTERNAL_IPS=127.0.0.1,localhost
+SECRET_KEY=$&0=t8mfjh8^92de0kyyh!8)=tnh$r$5#kzou+d!-^q#-fd^cq
+SENDGRID_API_KEY=blabla-goes-here

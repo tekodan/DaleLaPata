@@ -1,0 +1,151 @@
+{% extends '_layouts/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Crear Cuenta' %}{% endblock %}
+
+{% block content %}
+  <div id="ajuda-facebook" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{% trans 'Vincular con facebook' %}</h4>
+        </div>
+        <div class="modal-body">
+          <ol>
+            <li>
+              <p>{% trans 'On Facebook, find your name in the top navigation bar and click on it.' %}</p>
+
+              <p><img class="img-responsive" src="{% static 'img/kdmeubicho_nome.png' %}"
+                      alt="{% trans "Facebook's navigation bar" %}"></p>
+            </li>
+            <li>
+              <p>{% trans "After the page loads your profile address will be in your browser's address bar." %}</p>
+
+              <p><img class="img-responsive" src="{% static 'img/kdmeubicho_endereco.png' %}"
+                      alt="{% trans "Browser's address bar" %}"></p>
+            </li>
+            <li>
+              <p>{% trans 'Copy and paste the address in the form field' %}</p>
+
+              <p><img class="img-responsive" src="{% static 'img/kdmeubicho_form.png' %}"
+                      alt="{% trans 'Filled form' %}"></p>
+            </li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>{% trans 'Acceder con Facebook o Twitter:' %}</h4>
+  <a href="{% url 'social:begin' 'facebook' %}"><img src="{% static 'img/facebook.png' %}" alt="Facebook"/></a>
+  <a href="{% url 'social:begin' 'twitter' %}"><img src="{% static 'img/twitter.png' %}" alt="Twitter"/></a>
+
+  <h4>{% trans 'O crea una nueva cuenta:' %}</h4>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group{% if form.first_name.errors %} has-error{% endif %}">
+          <label for="{{ form.first_name.id_for_label }}" class="control-label">{% trans 'Nombres' %}</label>
+
+          <div class="controls">
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group{% if form.last_name.errors %} has-error{% endif %}">
+          <label for="{{ form.last_name.id_for_label }}" class="control-label">{% trans 'Apellidos' %}</label>
+
+          <div class="controls">
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+      <label for="{{ form.email.id_for_label }}" class="control-label">{% trans 'Email' %}</label>
+
+      <div class="controls">
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+    </div>
+    <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+      <label for="{{ form.username.id_for_label }}" class="control-label">{% trans 'Usuario' %}</label>
+
+      <div class="controls">
+        {{ form.username }}
+        <div class="help-block">{{ form.username.help_text }}</div>
+        {{ form.username.errors }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group{% if form.password1.errors %} has-error{% endif %}">
+          <label for="{{ form.password1.id_for_label }}" class="control-label">{% trans 'Contraseña' %}</label>
+
+          <div class="controls">
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group{% if form.password2.errors %} has-error{% endif %}">
+          <label for="{{ form.password2.id_for_label }}"
+                 class="control-label">{% trans 'Password Confirmacion' %}</label>
+
+          <div class="controls">
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>{% trans 'Informacion Opcional' %}</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
+            <label for="{{ form.phone.id_for_label }}" class="control-label">{% trans 'Telefono' %}</label>
+
+            <div class="controls">
+              {{ form.phone }}
+              {{ form.phone.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group{% if form.facebook.errors %} has-error{% endif %}">
+            <label for="{{ form.facebook.id_for_label }}" class="control-label">Facebook</label>
+
+            <div class="controls">
+              {{ form.facebook }}
+              <div class="help-block">{{ form.facebook.help_text|safe }}</div>
+              {{ form.facebook.errors }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-group text-right">
+      <input type="submit" name="submit" class="btn btn-primary" value="{% trans 'Crear Cuenta' %}">
+    </div>
+  </form>
+{% endblock content %}

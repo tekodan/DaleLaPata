@@ -1,0 +1,8 @@
+{% load i18n %}{% blocktrans %}Hello, {{ username }}.{% endblocktrans %}
+
+{% blocktrans %}Su registro de mascota no recibió ninguna actualización en los últimos meses, por lo que ha sido desactivado.{% endblocktrans %}
+
+{% blocktrans %}You can make a new registration if necessary.{% endblocktrans %}
+
+{% trans "Best regards," %}
+{{ site_name }}
