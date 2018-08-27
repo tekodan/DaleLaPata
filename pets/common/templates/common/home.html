@@ -1,0 +1,93 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block metatags %}
+  <meta name="description" content="Nuestro objetivo so los animales">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@kdmeubicho_">
+
+  <meta property="og:title" content="Cadê meu Bicho?">
+  <meta property="og:description" content="O objetivo do Cadê meu Bicho é proporcionar o encontro entre os melhores ou futuro melhores amigos. Você pode divulgar cachorros, gatos, ou outros animais que estão desaparecidos ou disponíveis para adoção.">
+  <meta property="og:url" content="https://cademeubicho.com">
+  <meta property="og:image" content="https://cademeubicho.com{% static 'img/background.jpg' %}">
+  <meta property="og:site_name" content="Cadê meu Bicho?">
+{% endblock %}
+
+{% block extra_navbar_css %}navbar-fixed-top navbar-home{% endblock %}
+
+{% block heading %}{% endblock %}
+
+{% block page %}
+  <div class="banner">
+    <div class="container">
+      <div class="callout">
+        <div hidden="true" class="intro-text">Explorar</div>
+        <div hidden="true" class="intro-text">Encontrar</div>
+        <div hidden="true" class="intro-text">Adoptar :)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 feature">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-paw fa-inverse fa-stack-1x"></i>
+        </span>
+
+          <h3>Mascota perdida?</h3>
+
+          <p>Ayudanos a encontrar a esos grandes amigos</p>
+
+          <p>Quieres ayudarnos a encontrarlo, <a href="{% url 'users:create' %}">Crea una cuenta</a>
+            y ayudanos a compartilo en redes sociales</p>
+        </div>
+
+        <div class="col-md-6 feature">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x c-green"></i>
+          <i class="fa fa-life-ring fa-inverse fa-stack-1x"></i>
+        </span>
+
+          <h3>Encontraste una mascota?</h3>
+
+          <p>Ud puede salbar una vida</p>
+
+          <p>Use el <a href="{% url 'meupet:search' %}">Buscador</a> y descubra si existe alguna coincidencia con la mascota que ud miró, use algunas <a href="{% url 'meupet:index' %}">categorias</a>.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 feature">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x c-red"></i>
+          <i class="fa fa-heart fa-inverse fa-stack-1x"></i>
+        </span>
+
+          <h3>Quiere adoptar?</h3>
+
+          <p>Compañeros que necesitan de tu corazon noble</p>
+
+          <p>Existen muchas mascotas esperando un hogar
+            <a href="{% url 'meupet:index' %}">aqui</a>.</p>
+        </div>
+
+        <div class="col-md-6 feature">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x c-blue"></i>
+          <i class="fa fa-facebook fa-inverse fa-stack-1x"></i>
+        </span>
+
+          <h3>Facebook</h3>
+
+          <p>Entra a nuestra <a href="https://www.facebook.com/kdmeubicho/">página</a> de Facebook.</p>
+
+          <p>...........</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
