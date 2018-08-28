@@ -129,6 +129,8 @@
                               {% trans 'La encontre!' %}
                             {% endif %}" 
 
+                  <input type="submit" class="btn btn-success" value="{% trans 'Resuelto?' %}" 
+
                             {% if pet.status.description|length == 0 %}
                               {% trans 'disabled' %}
                             {% endif %} />
