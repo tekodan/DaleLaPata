@@ -159,15 +159,10 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-<<<<<<< HEAD
+
 LANGUAGE_CODE = 'es-CO'
 
 TIME_ZONE = 'America/Bogota'
-=======
-LANGUAGE_CODE = 'pt-BR'
-
-TIME_ZONE = 'America/Sao_Paulo'
->>>>>>> 23a3d9fdf8cd72787dd50db4c571b9912879141a
 
 USE_I18N = True
 
