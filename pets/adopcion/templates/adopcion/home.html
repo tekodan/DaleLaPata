@@ -1,8 +1,12 @@
 {% extends '_layouts/base.html' %}
-{% load i18n %}
+{% load i18n static %}
+{% block title %}{% trans 'Postularse para ' %} {{ pet_name }} {% endblock %}
 
-{% block title %}{% trans 'Adopcion' %}{% endblock %}
-
-{% block content %}
-  {% include '_partials/contrato_list.html' %}
-{% endblock %}
+    {% block content %}
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-success">Confirmar Postulación</button>
+            <br>
+        </form>
+        <br>
+    {% endblock %}

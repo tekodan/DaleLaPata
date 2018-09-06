@@ -101,17 +101,18 @@ class Pet(TimeStampedModel):
     MALE = 'MA'
     FEMALE = 'FE'
     PET_SEX = (
-        (FEMALE, _('Female')),
-        (MALE, _('Male')),
+        (FEMALE, _('Hembra')),
+        (MALE, _('Macho')),
     )
     SMALL = 'SM'
     MEDIUM = 'MD'
     LARGE = 'LG'
     PET_SIZE = (
-        (SMALL, _('Small')),
-        (MEDIUM, _('Medium')),
-        (LARGE, _('Large')),
+        (SMALL, _('Pequeño')),
+        (MEDIUM, _('Mediano')),
+        (LARGE, _('Grande')),
     )
+    chip_id = models.IntegerField(unique=True, null=True, blank=True)
     owner = models.ForeignKey(OwnerProfile, on_delete=models.PROTECT)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)

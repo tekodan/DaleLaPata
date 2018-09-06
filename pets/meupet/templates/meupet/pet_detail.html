@@ -78,6 +78,13 @@
     <div class="col-md-7">
       <div class="panel panel-default">
         <div class="panel-body">
+
+          {% if pet.chip_id %}
+            <p>
+                <strong>{% trans 'Numero Chip' %}:</strong><br/>
+                {{ pet.chip_id }}
+            </p>
+          {% endif %}
           <p>
             <strong>{% trans 'Descripción' %}:</strong><br/>
             {{ pet.description }}
@@ -117,33 +124,37 @@
               <img src="{% static 'img/twitter.png' %}" alt="Twitter"/>
             </a>
           </p>
-          {% if user == pet.owner %}
+          
             <div class="pull-right">
               {% if not pet.status.final %}
-                <form action="{% url 'meupet:change_status' pet.slug %}" method="post" class="form-inline">
+                <!-- <form action="{% url 'meupet:change_status' pet.id %}" method="post" class="form-inline"> -->
+                <form action="{%url 'adopcion:create' pet.id%}" method="GET" class="form-inline">
                   {% csrf_token %}
+                  <input name="pet_id" id="pet_id" value="{{ pet.id }}" type="hidden">
                   <input type="submit" class="btn btn-success" value="
-                            {% if pet.status.description.find('adop') |length == 0 %}
+                            {% if pet.status.description == 'Mascota en adopción' %}
                               {% trans 'Postularse' %}
                             {% else %}
                               {% trans 'La encontre!' %}
-                            {% endif %}" 
+                            {% endif %}"
 
-                  <input type="submit" class="btn btn-success" value="{% trans 'Resuelto?' %}" 
-
-                            {% if pet.status.description|length == 0 %}
+                            {% if pet.status.final %}
                               {% trans 'disabled' %}
                             {% endif %} />
                 </form>
+
+
+              {% if user == pet.owner %}  
+              <a href="{% url 'meupet:edit' pet.id %}" class="btn btn-primary">{% trans 'Editar' %}</a>
+              {% if not pet.status.final %}
+                <a href="{% url 'meupet:poster' pet.slug %}" class="btn btn-primary" >{% trans 'Generar poster' %}</a>
               {% endif %}
-
-              <a href="{% url 'meupet:edit' pet.slug %}" class="btn btn-primary">{% trans 'Editar' %}</a>
-
-              <a href="{% url 'meupet:poster' pet.slug %}" class="btn btn-primary">{% trans 'Generar poster' %}</a>
+              
 
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_pet">
                 {% trans 'ELiminar' %}
               </button>
+              {% endif %}
             </div>
           {% endif %}
         </div>

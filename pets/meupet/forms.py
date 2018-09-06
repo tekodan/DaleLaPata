@@ -28,13 +28,14 @@ class PetForm(forms.ModelForm):
     class Meta:
         model = models.Pet
         fields = ('name', 'description', 'city', 'kind',
-                  'profile_picture', 'size', 'sex', 'status',)
+                  'profile_picture', 'size', 'sex', 'status','chip_id',)
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Costelinha')}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Nombre de la mascota')}),
+            'chip_id': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('# chip en caso de tenerlo')}),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': _(
-                    "It is black and chubby, very shy, "
+                    "Describe la mascota"
                     "has went gone next to the school in downtown. "
                     "There's a slight flaw in the tail fur.")
             }),
@@ -87,6 +88,7 @@ class PetForm(forms.ModelForm):
 
 
 class SearchForm(forms.Form):
+    chip_id = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('# chip en caso de tenerlo')}), required=False)
     city = _build_choice_field(_('City'))
     kind = _build_choice_field(_('Kind'))
     size = _build_choice_field(_('Size'), models.Pet.PET_SIZE)
@@ -107,6 +109,7 @@ class SearchForm(forms.Form):
         cleaned_data = super(SearchForm, self).clean()
 
         has_cleaned_filter = any([
+            cleaned_data['chip_id'],
             cleaned_data['city'],
             cleaned_data['kind'],
             cleaned_data['sex'],
@@ -115,4 +118,4 @@ class SearchForm(forms.Form):
         ])
 
         if not has_cleaned_filter:
-            raise forms.ValidationError(_('You must select at least one filter'))
+            raise forms.ValidationError(_('Debes seleccionar un filtro'))
