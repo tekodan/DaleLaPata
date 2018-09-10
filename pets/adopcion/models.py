@@ -8,6 +8,7 @@
 from django.db import models
 from meupet.models import Pet
 from users.models import OwnerProfile
+from django.utils.translation import ugettext_lazy as _
 
 class MyContratos(models.Model):
     fecha = models.DateTimeField()
@@ -60,4 +61,31 @@ class MyVisitas(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'my_visitas'               
+        db_table = 'my_visitas'
+
+class MyFundacion(models.Model):
+    RUT = 'RUT'
+    NIT = 'NIT'
+    TIPO_ID = (
+        (RUT, _('RUT')),
+        (NIT, _('NIT')),
+    )
+    tipo_identificacion = models.CharField(max_length=3,
+                                           choices=TIPO_ID,
+                                           blank=True)
+    numero_identificacion = models.CharField(unique=True,max_length=15)
+    razon_social = models.CharField(max_length=250, blank=True, null=True)
+    fecha_fundacion = models.DateTimeField(blank=True, null=True)
+    email = models.CharField(unique=True, max_length=250, blank=True, null=True)
+    telefono = models.CharField(max_length=250, blank=True, null=True)
+    logo = models.ImageField(upload_to='fundacion_profiles',
+                                        help_text=_('Maximo tamaño de imagen 8mb'))
+    facebook = models.URLField(max_length=250, blank=True, null=True,
+                               validators=[])
+    twitter = models.URLField(max_length=250, blank=True, null=True,
+                               validators=[])
+    contrato_base = models.CharField(max_length=250, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'my_fundacion'

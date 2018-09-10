@@ -1,0 +1,11 @@
+{% extends '_layouts/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Crear Cuenta de Fundación' %}{% endblock %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ aform.as_p }}
+    <input type="submit" name="{{aform.prefix}}" value="Submit" />
+    {{ bform.as_p }}
+    <input type="submit" name="{{bform.prefix}}" value="Submit" />
+</form>

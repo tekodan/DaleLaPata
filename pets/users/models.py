@@ -12,10 +12,19 @@ class OwnerProfile(AbstractUser):
         (CC, _('Cedula ciudadania')),
         (TI, _('Tarjeta identidad')),
     )
+    R_01 = 'R_01'
+    R_02 = 'R_02'
+    R_03 = 'R_03'
+    TIPO_ROL = (
+        (R_01, _('Responsable')),
+        (R_02, _('Vinculado')),
+        (R_03, _('Brigadista')),
+    )
+    rol = models.CharField(max_length=4, choices=TIPO_ROL, blank=True)
     tipo_identificacion = models.CharField(max_length=2,
                             choices=TIPO_ID,
                             blank=True)
-    num_identificacion = models.IntegerField('Numero de identificación',unique=True,validators=[MinValueValidator(11111111)])
+    num_identificacion = models.CharField('Numero de identificación',unique=True, max_length=10)
     is_information_confirmed = models.BooleanField(default=False)
     facebook = models.URLField(max_length=250, blank=True, null=True,
                                validators=[validate_facebook_url])
