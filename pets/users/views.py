@@ -69,29 +69,7 @@ def _get_form(request, formcls, prefix):
     #data = request.POST if prefix in request.POST else None
     data = request.POST if prefix in next(iter(request.POST.keys())) else None
     return formcls(data, prefix=prefix)
-"""
-class CreateFundacionView(TemplateView):
-    template_name = 'users/create_fundacion.html'
 
-    def get(self, request, *args, **kwargs):
-        return self.render_to_response(
-            #{'aform': RegisterFormFund(prefix='aform_pre'), 'bform': RegisterForm(prefix='bform_pre')})
-            {'aform': RegisterFormFund(prefix='aform_pre')})
-
-    def post(self, request, *args, **kwargs):
-        aform = _get_form(request, RegisterFormFund, 'aform_pre')
-        #bform = _get_form(request, RegisterForm, 'bform_pre')
-        if aform.is_bound and aform.is_valid():
-            # Process aform and render response
-            #self.render_to_response({'aform': aform, 'bform': bform})
-            self.render_to_response({'aform': aform})
-        #elif bform.is_bound and bform.is_valid():
-        #    # Process bform and render response
-        #    self.render_to_response({'aform': aform, 'bform': bform})
-
-        #return self.render_to_response({'aform': aform, 'bform': bform})
-        return self.render_to_response({'aform': aform})
-"""
 
 class EditUserProfileView(LoginRequiredMixin, UpdateView):
     template_name = 'users/edit_profile.html'

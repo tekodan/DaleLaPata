@@ -5,8 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 from password_reset.forms import PasswordRecoveryForm, PasswordResetForm
 
-from users.models import OwnerProfile
-from adopcion.models import MyFundacion
+from users.models import OwnerProfile, MyFundacion
 
 
 class LoginForm(AuthenticationForm):
@@ -73,7 +72,7 @@ class RegisterFormFund(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RegisterFormFund, self).__init__(*args, **kwargs)
         self.fields['tipo_identificacion'].widget.attrs.update({'class': 'form-control'})
-        self.fields['numero_identificacion'].widget.attrs.update({'class': 'form-control'})
+        self.fields['num_identificacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
         self.fields['fecha_fundacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
@@ -83,11 +82,11 @@ class RegisterFormFund(forms.ModelForm):
         self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
         self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update(
-            {'placeholder': _('Enter the full address for your Facebook profile.')})
+            {'placeholder': _('Ingrese la direccion completa de su usuario en Facebook')})
 
     class Meta:
         model = MyFundacion
-        fields = ('tipo_identificacion', 'numero_identificacion', 'razon_social', 'fecha_fundacion',
+        fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
                   'email', 'telefono', 'logo', 'facebook','twitter','contrato_base',)
 
 class UpdateUserForm(UserForm):
