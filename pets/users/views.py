@@ -13,6 +13,9 @@ from users.forms import LoginForm, RegisterForm, UpdateUserForm, UsersPasswordRe
 from users.models import OwnerProfile
 from django.shortcuts import render
 
+def SelectCreate(request):
+    return render(request, 'users/SelectCreate.html')
+
 
 class RecoverView(Recover):
     template_name = 'users/recover.html'
@@ -69,6 +72,25 @@ def _get_form(request, formcls, prefix):
     #data = request.POST if prefix in request.POST else None
     data = request.POST if prefix in next(iter(request.POST.keys())) else None
     return formcls(data, prefix=prefix)
+
+def CreateFundacionView(request):
+    #log = logging.getLogger(__name__)
+    if request.method == "POST":
+
+        form = RegisterFormFund(request.POST)
+        if form.is_valid():
+
+            MyFundacion = form.save()
+            #log.info("ENTRO fundacion")
+            #return redirect(reverse('users:create_user',kwargs={'pk': MyFundacion.id}))
+            return render(request, 'users/create_fundacion.html', {'form': form})
+            #return render(request, 'users/create_fundacion.html', {'form': form})
+        else:
+            return render(request, 'users/create_fundacion.html', {'form': form})
+
+    else:
+        form = RegisterFormFund()
+        return render(request, 'users/create_fundacion.html', {'form': form})
 
 
 class EditUserProfileView(LoginRequiredMixin, UpdateView):

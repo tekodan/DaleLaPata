@@ -75,7 +75,7 @@
           <li><a href="{% url 'users:profile' %}">{% trans 'Perfil' %}</a></li>
           <li><a href="{% url 'users:logout' %}">{% trans 'Cerrar Sesión' %}</a></li>
         {% else %}
-          <li><a href="{% url 'users:create' %}">{% trans 'Crear Cuenta' %}</a></li>
+          <li><a href="{% url 'users:createSelect' %}">{% trans 'Crear Cuenta' %}</a></li>
           <li><a href="{% url 'users:login' %}">{% trans 'Acceder' %}</a></li>
         {% endif %}
         <li><a href="{% url 'common:about' %}">{% trans 'Acerca de' %}</a></li>

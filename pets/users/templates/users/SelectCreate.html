@@ -1,0 +1,22 @@
+{% extends '_layouts/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Crear Cuenta' %}{% endblock %}
+
+{% block content %}
+<style type="text/css">
+  .btn-huge{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+</style>
+ <div class="row">
+        <div class="col-md-5">
+            <a href="{% url 'users:createFundacion'%}" class="btn btn-primary btn-lg btn-block btn-huge">Fundación</a>
+        </div>
+        <div class="col-md-5">
+            <a href="{% url 'users:create'%}" class="btn btn-primary btn-lg btn-block btn-huge">Usuario</a>
+        </div>  
+  </div>
+
+{% endblock content %}

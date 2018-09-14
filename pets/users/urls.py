@@ -4,8 +4,11 @@ from django.contrib.auth.views import LogoutView
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.CreateUserView.as_view(), name='create'),
-    #url(r'^$', views.CreateFundacionView.as_view(), name='create'),
+    
+    #url(r'^$fundacion', views.CreateFundacionView.as_view(), name='createFundacion'),
+    url(r'^$', views.SelectCreate, name='createSelect'),
+    url(r'^normal$', views.CreateUserView.as_view(), name='create'),
+    url(r'^fundacion$', views.CreateFundacionView, name='createFundacion'),
     url(r'^profile/(?P<pk>[0-9]+)/$', views.ProfileDetailView.as_view(), name='user_profile'),
     url(r'^profile/$', views.UserProfileView.as_view(), name='profile'),
     url(r'^profile/edit/$', views.EditUserProfileView.as_view(), name='edit'),
