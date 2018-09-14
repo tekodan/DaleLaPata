@@ -6,7 +6,7 @@
 {% block content %}
   <div class="row">
     <div class="col-md-12">
-      <h4>{% trans 'Contacts' %}</h4>
+      <h4>{% trans 'Contactar' %}</h4>
       <ul class="list-unstyled">
         {% if object.facebook %}
           <li>
@@ -18,7 +18,7 @@
         </li>
         {% if object.phone %}
           <li>
-            {% trans 'Phone' %} <i class="fa fa-phone"></i>: {{ object.phone }}
+            {% trans 'Telefono' %} <i class="fa fa-phone"></i>: {{ object.phone }}
           </li>
         {% endif %}
       </ul>
@@ -27,7 +27,7 @@
         <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
       {% endif %}
 
-      <h4>{% trans 'Registered pets' %}</h4>
+      <h4>{% trans 'Mascotas registradas' %}</h4>
       {% include '_partials/pets_list.html' %}
     </div>
   </div>

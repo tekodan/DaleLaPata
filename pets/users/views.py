@@ -43,7 +43,7 @@ class CreateUserView(CreateView):
     template_name = 'users/create.html'
     authenticated_redirect_url = reverse_lazy('meupet:index')
 
-    msg = _('Your account has been successfully created, access <a href="{0}">'
+    msg = _('Su cuenta ha sido creada, access <a href="{0}">'
             'this page</a> and register the pet :)')
 
     def dispatch(self, request, *args, **kwargs):

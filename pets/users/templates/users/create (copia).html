@@ -47,39 +47,60 @@
 
   <h4>{% trans 'O crea una nueva cuenta:' %}</h4>
 
-<div class="panel-group" id="accordion"> <!-- accordion 1 -->
+ <!--
+ <div class="panel-group" id="accordion"> <-- accordion 1 ->
    <div class="panel panel-primary">
-   <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne" style="color:white;">
-        <div class="panel-heading" style="background-color: #498aa3;"> <!-- panel-heading -->
-            <h4 class="panel-title"> <!-- title 1 -->
-            
-              Datos Fundación
-            
+   
+        <div class="panel-heading"> <-- panel-heading ->
+            <h4 class="panel-title"> <-- title 1 ->
+            <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
+              Datos de fundacion
+            </a>
            </h4>
         </div>
-        </a>
-    <!-- panel body -->
+    <-- panel body ->
         <div id="accordionOne" class="panel-collapse collapse in">
           <div class="panel-body">
-           form fundacion
+           prueba
           </div>
         </div>
   </div>
-  
-   <div class="panel panel-success">  <!-- accordion 2 -->
-    
-          <div class="panel-heading"> 
-          <h4 class="panel-title"> <!-- title 2 -->
-            <a data-toggle="collapse" data-parent="#accordion" href="#accordionTwo">
-              Datos de Usuario
-            </a>
-          </h4>
-          </div>
-     <!-- panel body -->
-        <div id="accordionTwo" class="panel-collapse collapse">
-          <div class="panel-body">
+   -->
 
-              <form method="post">
+   <script>
+$(document).ready(function(){
+    $("#toggle-btn").click(function(){
+      $("#toggle-example").collapse('toggle'); // toggle collapse
+    });
+});
+</script>
+<style>
+.DemoBS2{
+    /*margin:20px;*/
+}
+p{
+  
+    padding:10px;
+    margin:10px 0px;
+    border:2px solid #fa4b2a;
+    border-radius:10px;
+    box-shadow:4px 4px 4px #ccc;
+   
+}
+
+</style>
+<body>
+<div class="DemoBS2">
+  <!-- Toogle Buttons -->
+    <button type="button" class="btn btn-warning" id="toggle-btn"
+  data-toggle="collapse" data-target="#toggle-example">Click to Toogle</button>
+ 
+    <div id="toggle-example" class="collapse in">
+      <p>If you don't like something, <b>change it</b>. 
+    If you can't change it, change your <b>attitude</b>.</p></div>
+</div>
+
+  <form method="post">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6">
@@ -180,14 +201,4 @@
       <input type="submit" name="submit" class="btn btn-primary" value="{% trans 'Crear Cuenta' %}">
     </div>
   </form>
-
-          </div>
-        </div>
-    
-   </div>
-</div>
-<br><br>
-</div>
-
- 
 {% endblock content %}

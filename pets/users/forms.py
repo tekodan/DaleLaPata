@@ -45,8 +45,8 @@ class RegisterForm(UserForm):
         self.fields['facebook'].widget.attrs.update(
             {'placeholder': _('Enter the full address for your Facebook profile.')})
 
-        self.fields['username'].help_text = _('Required. 30 characters or less. '
-                                              'Only letters, numbers e @/./+/-/_.')
+        self.fields['username'].help_text = _('Requerido 30 caracteres o menos. '
+                                              'Solo letras, numeros y @/./+/-/_.')
 
     class Meta:
         model = OwnerProfile
