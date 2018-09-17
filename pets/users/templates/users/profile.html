@@ -1,12 +1,43 @@
 {% extends '_layouts/base.html' %}
 {% load i18n %}
 
-{% block title %}{{ object.first_name }} {{ object.last_name }}{% endblock %}
+{% block title %}{{ fundacion.razon_social }} - {{ object.first_name }} {{ object.last_name }}{% endblock %}
 
 {% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+      <h4>{% trans 'Contactar Fundacion' %}</h4>
+      <ul class="list-unstyled">
+        {% if fundacion.logo %}
+          <li>
+            <a href="{{ fundacion.logo }}">Logo</a>
+          </li>
+        {% endif %}
+        {% if fundacion.facebook %}
+          <li>
+            <a href="{{ fundacion.facebook }}">Facebook</a>
+          </li>
+        {% endif %}
+        <li>
+          {% trans 'Email' %} <i class="fa fa-envelope"></i>: <a href="mailto:{{ fundacion.email }}">{{ fundacion.email }}</a>
+        </li>
+        {% if fundacion.telefono %}
+          <li>
+            {% trans 'Telefono' %} <i class="fa fa-phone"></i>: {{ fundacion.phone }}
+          </li>
+        {% endif %}
+      </ul>
+
+      {% if user.is_authenticated and user.id == object.id %}
+        <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
+      {% endif %}
+
+    </div>
+
   <div class="row">
-    <div class="col-md-12">
-      <h4>{% trans 'Contactar' %}</h4>
+    <div class="col-md-6">
+      <h4>{% trans 'Contactar ' %}</h4>
       <ul class="list-unstyled">
         {% if object.facebook %}
           <li>
@@ -21,14 +52,23 @@
             {% trans 'Telefono' %} <i class="fa fa-phone"></i>: {{ object.phone }}
           </li>
         {% endif %}
+        {% if object.rol %}
+          <li>
+            {% trans 'Rol' %} <i class="fa fa-user"></i>: {{ object.get_rol }}
+          </li>
+        {% endif %}
       </ul>
 
       {% if user.is_authenticated and user.id == object.id %}
         <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
       {% endif %}
+    </div>
 
+    <div class="row">
+    <div class="col-md-12">
       <h4>{% trans 'Mascotas registradas' %}</h4>
       {% include '_partials/pets_list.html' %}
     </div>
+
   </div>
 {% endblock %}

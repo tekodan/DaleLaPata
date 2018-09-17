@@ -64,5 +64,8 @@ class OwnerProfile(AbstractUser):
     def get_absolute_url(self):
         return reverse('users:user_profile', args=[self.id])
 
+    def get_rol(self):
+        return dict(self.TIPO_ROL).get(self.rol)
+
     def __str__(self):
         return self.username

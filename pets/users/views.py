@@ -10,7 +10,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView, DetailVie
 from password_reset.views import Recover, RecoverDone, Reset, ResetDone
 
 from users.forms import LoginForm, RegisterForm, UpdateUserForm, UsersPasswordRecoveryForm, UsersPasswordResetForm, RegisterFormFund
-from users.models import OwnerProfile
+from users.models import OwnerProfile, MyFundacion
 from django.shortcuts import render
 
 def SelectCreate(request):
@@ -46,8 +46,8 @@ class CreateUserView(CreateView):
     template_name = 'users/create.html'
     authenticated_redirect_url = reverse_lazy('meupet:index')
 
-    msg = _('Su cuenta ha sido creada, access <a href="{0}">'
-            'this page</a> and register the pet :)')
+    msg = _('Su cuenta ha sido creada, Accede <a href="{0}">'
+            'a esta pagina</a> y registra a muchos amigos :)')
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -113,10 +113,11 @@ class UserLogin(LoginView):
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'users/profile.html'
-
+    #MyFundacion.objects.get(self.request.user.fundacion)
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context['object'] = self.request.user
+        context['fundacion'] = self.request.user.fundacion
         context['pets'] = self.request.user.pet_set.all()
         return context
 
@@ -128,6 +129,7 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         context['pets'] = self.object.pet_set.all()
+        context['fundacion'] = self.request.user.fundacion
         return context
 
 

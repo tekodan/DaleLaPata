@@ -8,7 +8,7 @@ from rest_framework.serializers import (
 
 from cities.models import City, State
 from meupet.models import Pet
-from users.models import OwnerProfile
+from users.models import OwnerProfile, MyFundacion
 
 city_fields = (
     'code',
@@ -23,10 +23,16 @@ state_fields = (
     'name',
 )
 
+fundacion_fields = (
+    'id',
+    'razon_social',
+)
+
 owner_fields = (
     'id',
     'facebook',
     'name',
+    'fundacion',
 )
 
 pet_fields = (
@@ -55,7 +61,16 @@ class StateSerializer(ModelSerializer):
         fields = state_fields
 
 
+class FundacionSerializer(ModelSerializer):
+    razon_social = CharField(source='get_razon_social', read_only=True)
+    
+    class Meta:
+        model = MyFundacion
+        fields = fundacion_fields
+
 class OwnerSerializer(ModelSerializer):
+    fundacion = FundacionSerializer()
+
     name = CharField(source='get_full_name', read_only=True)
     id = HyperlinkedRelatedField(
         view_name='users:user_profile',

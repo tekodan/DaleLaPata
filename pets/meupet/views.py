@@ -109,6 +109,7 @@ class RegisterPetView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        form.instance.fundacion = self.request.user.fundacion
         return super(RegisterPetView, self).form_valid(form)
 
 
