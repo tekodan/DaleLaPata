@@ -21,7 +21,7 @@ class MyFundacion(models.Model):
     email = models.CharField(unique=True, max_length=250)
     telefono = models.CharField(max_length=250, blank=True, null=True)
     logo = models.ImageField(upload_to='fundacion_profiles',
-                                        help_text=_('Maximo tamaño de imagen 8mb'))
+                                        help_text=_('Maximo tamaño de imagen 8mb'), blank=True, null=True)
     facebook = models.URLField(max_length=250, blank=True, null=True,
                                validators=[])
     twitter = models.URLField(max_length=250, blank=True, null=True,
@@ -31,6 +31,9 @@ class MyFundacion(models.Model):
     class Meta:
         managed = False
         db_table = 'my_fundacion'
+
+    def __str__(self):
+        return str(self.num_identificacion)+str(' - ')+str(self.razon_social)
 
 class OwnerProfile(AbstractUser):
     CC = 'CC'

@@ -1,27 +1,21 @@
 {% extends '_layouts/base.html' %}
 {% load i18n static thumbnail %}
 
-{% block title %}{% trans 'Postulaciòn exitosa' %}{% endblock %}
+{% block title %}{% trans 'Solicitud de fundacion exitosa' %}{% endblock %}
 
 {% block content %}
   <div class="row">
     <div class="col-md-9">
 
-      <h2>{{ user_name }} estás a un paso de chocar la pata con {{ pet_nombre }}!</h2>
+      <h2>La fundación {{ pet_nombre }} ha sido solicitada con exito!</h2>
 
-       <p>El registro de tu postulación fue enviado a la fundacion {}, los cuales te contactaran para completar el
-       proceso de adopcíon, puedes contactarte con ellos para agilizar el proceso</p>
+       <p>El registro de tu solicitud fue enviado,los administradores te contactaran para validar la información</p>
 
       <h3>Datos fundación</h3>
-      <p>.....</p>
-
-      <p>Esta informacion sera compartida automaticamente en <a href="https://www.facebook.com/fbfundacion">Facebook</a>
-        y tambien en <a href="https://twitter.com/twfundacion">Twitter</a> de la fundación [] ! :)</p>
-
-      <p>Para ver los detalles de este gran amigo <a href="{% url 'meupet:detail' pet_slug %}">aqui</a>.</p>
-
-      <p>
-        Sigue descrubriendo nuevos amigos en  <a href="{% url 'meupet:index'  %}">aqui</a>.</p>.</p>
+       
+       <fieldset disabled="disabled">
+            {{ form.as_ul }}
+        </fieldset>
 
       <p>Puedes compartir este sitio en las redes sociales</p>
 

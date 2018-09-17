@@ -47,11 +47,11 @@ class RegisterForm(UserForm):
 
         self.fields['username'].help_text = _('Requerido 30 caracteres o menos. '
                                               'Solo letras, numeros y @/./+/-/_.')
-
+        self.fields['fundacion'].widget.attrs.update({'class': 'form-control'})
     class Meta:
         model = OwnerProfile
         fields = ('first_name', 'last_name', 'email', 'username',
-                  'facebook', 'phone', 'password1', 'password2',)
+                  'facebook', 'phone', 'password1', 'password2', 'fundacion',)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

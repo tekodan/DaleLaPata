@@ -53,6 +53,16 @@
 
   <form method="post">
     {% csrf_token %}
+
+    <div class="form-group{% if form.fundacion.errors %} has-error{% endif %}">
+      <label for="{{ form.fundacion.id_for_label }}" class="control-label">{% trans 'Fundacion' %}</label>
+
+      <div class="controls">
+        {{ form.fundacion }}
+        {{ form.fundacion.errors }}
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-6">
         <div class="form-group{% if form.first_name.errors %} has-error{% endif %}">

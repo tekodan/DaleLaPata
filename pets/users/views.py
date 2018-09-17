@@ -83,7 +83,7 @@ def CreateFundacionView(request):
             MyFundacion = form.save()
             #log.info("ENTRO fundacion")
             #return redirect(reverse('users:create_user',kwargs={'pk': MyFundacion.id}))
-            return render(request, 'users/create_fundacion.html', {'form': form})
+            return render(request, 'users/doneFundacion.html', {'form': form})
             #return render(request, 'users/create_fundacion.html', {'form': form})
         else:
             return render(request, 'users/create_fundacion.html', {'form': form})
