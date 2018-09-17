@@ -28,6 +28,17 @@ class UserForm(forms.ModelForm):
             'here</a> to get help filling this field.')
         self.fields['phone'].widget.attrs.update({'class': 'form-control'})
 
+def _build_choice_field(label, choices=None, required=False):
+    empty_choice = (('', '------------'),)
+    field = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label=label,
+        choices=empty_choice,
+        required=required
+    )
+    if choices:
+        field.choices += choices
+    return field
 
 class RegisterForm(UserForm):
     password1 = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
@@ -48,10 +59,21 @@ class RegisterForm(UserForm):
         self.fields['username'].help_text = _('Requerido 30 caracteres o menos. '
                                               'Solo letras, numeros y @/./+/-/_.')
         self.fields['fundacion'].widget.attrs.update({'class': 'form-control'})
+
+        #self.fields['rol'] = _build_choice_field(_('Rol'), required=True)
+        self.fields['rol']: forms.Select(attrs={'class': 'form-control'})
+        self.fields['rol'].widget.attrs.update({'class': 'form-control'})
+
+        self.fields['tipo_identificacion']: forms.Select(attrs={'class': 'form-control'})
+        self.fields['tipo_identificacion'].widget.attrs.update({'class': 'form-control'})
+        self.fields['num_identificacion'].widget.attrs.update({'class': 'form-control'})
+
     class Meta:
         model = OwnerProfile
         fields = ('first_name', 'last_name', 'email', 'username',
-                  'facebook', 'phone', 'password1', 'password2', 'fundacion',)
+                  'facebook', 'phone', 'password1', 'password2', 'fundacion', 
+                  'rol', 'tipo_identificacion', 'num_identificacion')
+
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

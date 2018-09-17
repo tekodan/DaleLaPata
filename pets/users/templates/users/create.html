@@ -54,12 +54,51 @@
   <form method="post">
     {% csrf_token %}
 
-    <div class="form-group{% if form.fundacion.errors %} has-error{% endif %}">
-      <label for="{{ form.fundacion.id_for_label }}" class="control-label">{% trans 'Fundacion' %}</label>
+     <div class="row">
+      <div class="col-md-6">
+        <div class="form-group{% if form.fundacion.errors %} has-error{% endif %}">
+          <label for="{{ form.fundacion.id_for_label }}" class="control-label">{% trans 'Fundación' %}</label>
 
-      <div class="controls">
-        {{ form.fundacion }}
-        {{ form.fundacion.errors }}
+          <div class="controls">
+            {{ form.fundacion }}
+            {{ form.fundacion.errors }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group{% if form.rol.errors %} has-error{% endif %}">
+          <label for="{{ form.rol.id_for_label }}" class="control-label">{% trans 'Rol' %}</label>
+
+          <div class="controls">
+            {{ form.rol }}
+            {{ form.rol.errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group{% if form.tipo_identificacion.errors %} has-error{% endif %}">
+          <label for="{{ form.tipo_identificacion.id_for_label }}" class="control-label">{% trans 'Tipo documento' %}</label>
+
+          <div class="controls">
+            {{ form.tipo_identificacion }}
+            {{ form.tipo_identificacion.errors }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group{% if form.num_identificacion.errors %} has-error{% endif %}">
+          <label for="{{ form.num_identificacion.id_for_label }}" class="control-label">{% trans 'Numero documento ' %}</label>
+
+          <div class="controls">
+            {{ form.num_identificacion }}
+            {{ form.num_identificacion.errors }}
+          </div>
+        </div>
       </div>
     </div>
 

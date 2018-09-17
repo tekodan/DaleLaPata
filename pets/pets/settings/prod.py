@@ -44,6 +44,7 @@ THIRD_PARTS_APPS = (
     'password_reset',
     'rest_framework',
     'social_django',
+    #'simple_autocomplete',
 )
 
 PROJECT_APPS = (

@@ -11,7 +11,7 @@ from autoslug import AutoSlugField
 from django_extensions.db.models import TimeStampedModel
 
 from meupet import services
-from users.models import OwnerProfile
+from users.models import OwnerProfile, MyFundacion
 
 
 class PetQuerySet(models.QuerySet):
@@ -132,6 +132,7 @@ class Pet(TimeStampedModel):
     request_key = models.CharField(blank=True, max_length=40)
     active = models.BooleanField(default=True)
     slug = AutoSlugField(max_length=50, populate_from=get_slug, unique=True)
+    fundacion = models.ForeignKey(MyFundacion, models.DO_NOTHING, db_column='fundacion')
 
     objects = PetQuerySet.as_manager()
 
