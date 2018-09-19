@@ -1,7 +1,7 @@
 from .forms import PostForm
 from django.shortcuts import render
 from meupet.models import Pet
-from adopcion.models import MyRelacion, MyTipoRelacion
+from adopcion.models import Relacion, TipoRelacion
 import logging
 from django.utils import timezone
 
@@ -17,9 +17,9 @@ def post_new(request, pk):
             ownerprofile.username=ownerprofile.num_identificacion
             ownerprofile.password=12345
             ownerprofile.save()
-            tipor = MyTipoRelacion.objects.get(id=int(1))
+            tipor = TipoRelacion.objects.get(id=int(1))
 
-            relacion=MyRelacion()
+            relacion=Relacion()
             relacion.usuario=ownerprofile
             relacion.mascota = pet
             relacion.fecha = timezone.now()

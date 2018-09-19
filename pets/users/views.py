@@ -10,7 +10,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView, DetailVie
 from password_reset.views import Recover, RecoverDone, Reset, ResetDone
 
 from users.forms import LoginForm, RegisterForm, UpdateUserForm, UsersPasswordRecoveryForm, UsersPasswordResetForm, RegisterFormFund
-from users.models import OwnerProfile, MyFundacion
+from users.models import OwnerProfile, Fundacion
 from django.shortcuts import render
 
 def SelectCreate(request):
@@ -80,9 +80,9 @@ def CreateFundacionView(request):
         form = RegisterFormFund(request.POST)
         if form.is_valid():
 
-            MyFundacion = form.save()
+            Fundacion = form.save()
             #log.info("ENTRO fundacion")
-            #return redirect(reverse('users:create_user',kwargs={'pk': MyFundacion.id}))
+            #return redirect(reverse('users:create_user',kwargs={'pk': Fundacion.id}))
             return render(request, 'users/doneFundacion.html', {'form': form})
             #return render(request, 'users/create_fundacion.html', {'form': form})
         else:
@@ -113,7 +113,7 @@ class UserLogin(LoginView):
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'users/profile.html'
-    #MyFundacion.objects.get(self.request.user.fundacion)
+    #Fundacion.objects.get(self.request.user.fundacion)
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context['object'] = self.request.user

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 from password_reset.forms import PasswordRecoveryForm, PasswordResetForm
 
-from users.models import OwnerProfile, MyFundacion
+from users.models import OwnerProfile, Fundacion
 
 
 class LoginForm(AuthenticationForm):
@@ -107,7 +107,7 @@ class RegisterFormFund(forms.ModelForm):
             {'placeholder': _('Ingrese la direccion completa de su usuario en Facebook')})
 
     class Meta:
-        model = MyFundacion
+        model = Fundacion
         fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
                   'email', 'telefono', 'logo', 'facebook','twitter','contrato_base',)
 

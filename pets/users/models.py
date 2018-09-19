@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-class MyFundacion(models.Model):
+class Fundacion(models.Model):
     RUT = 'RUT'
     NIT = 'NIT'
     TIPO_ID = (
@@ -28,9 +28,9 @@ class MyFundacion(models.Model):
                                validators=[])
     contrato_base = models.CharField(max_length=250, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'my_fundacion'
+    def __init__(self, arg):
+        super(Fundacion, self).__init__()
+        self.arg = arg
 
     def __str__(self):
         return str(self.num_identificacion)+str(' - ')+str(self.razon_social)
@@ -59,7 +59,7 @@ class OwnerProfile(AbstractUser):
     facebook = models.URLField(max_length=250, blank=True, null=True,
                                validators=[validate_facebook_url])
     phone = models.CharField('Telefono de contacto',  max_length=30, blank=True)
-    fundacion = models.ForeignKey(MyFundacion, models.DO_NOTHING, db_column='fundacion', blank=True, null=True)
+    fundacion = models.ForeignKey(Fundacion, models.DO_NOTHING, db_column='fundacion', blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('users:user_profile', args=[self.id])

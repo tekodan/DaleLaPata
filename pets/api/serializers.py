@@ -8,7 +8,7 @@ from rest_framework.serializers import (
 
 from cities.models import City, State
 from meupet.models import Pet
-from users.models import OwnerProfile, MyFundacion
+from users.models import OwnerProfile, Fundacion
 
 city_fields = (
     'code',
@@ -65,7 +65,7 @@ class FundacionSerializer(ModelSerializer):
     razon_social = CharField(source='get_razon_social', read_only=True)
     
     class Meta:
-        model = MyFundacion
+        model = Fundacion
         fields = fundacion_fields
 
 class OwnerSerializer(ModelSerializer):

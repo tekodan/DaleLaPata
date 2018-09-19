@@ -50,8 +50,8 @@ THIRD_PARTS_APPS = (
 PROJECT_APPS = (
     'cities',
     'common',
-    'meupet',
     'users',
+    'meupet',    
     'adopcion'
 )
 

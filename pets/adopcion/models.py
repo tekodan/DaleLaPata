@@ -10,56 +10,60 @@ from meupet.models import Pet
 from users.models import OwnerProfile
 from django.utils.translation import ugettext_lazy as _
 
-class MyContratos(models.Model):
+class Contratos(models.Model):
     fecha = models.DateTimeField()
     adjunto = models.CharField(max_length=250)
     estado = models.CharField(max_length=100, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'my_contratos'
+    def __init__(self, arg):
+        super(Contratos, self).__init__()
+        self.arg = arg
 
-class MyTipoRelacion(models.Model):
+class TipoRelacion(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=250)
 
-    class Meta:
-        managed = False
-        db_table = 'my_tipo_relacion'
+    def __init__(self, arg):
+        super(TipoRelacion, self).__init__()
+        self.arg = arg
 
-class MyRelacion(models.Model):
+class Relacion(models.Model):
     usuario = models.ForeignKey(OwnerProfile, models.DO_NOTHING, db_column='usuario', primary_key=True)
     mascota = models.ForeignKey(Pet, models.DO_NOTHING, db_column='mascota')
     fecha = models.DateTimeField()
-    tipo_relacion = models.ForeignKey('MyTipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
-    contratos = models.ForeignKey('MyContratos', models.DO_NOTHING, db_column='contratos', blank=True, null=True)
+    tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
+    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos', blank=True, null=True)
+
+    def __init__(self, arg):
+        super(Relacion, self).__init__()
+        self.arg = arg
 
     class Meta:
         managed = False
-        db_table = 'my_relacion'
+        db_table = 'relacion'
         unique_together = (('usuario', 'mascota'),)
 
     def get_contratos(self):
         return self.contratos.fecha
 
-class MySeguimiento(models.Model):
-    contratos = models.ForeignKey('MyContratos', models.DO_NOTHING, db_column='contratos')
+class Seguimiento(models.Model):
+    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')
     fecha = models.DateTimeField()
     observaciones = models.CharField(max_length=250, blank=True, null=True)
     adjuntos = models.CharField(max_length=250, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'my_seguimiento'
+    def __init__(self, arg):
+        super(Seguimiento, self).__init__()
+        self.arg = arg
 
-class MyVisitas(models.Model):
-    contratos = models.ForeignKey('MyContratos', models.DO_NOTHING, db_column='contratos')
+class Visitas(models.Model):
+    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')
     fecha_visita = models.DateTimeField()
     fecha_prox_visita = models.DateTimeField(blank=True, null=True)
     observaciones = models.CharField(max_length=250)
     adjuntos = models.CharField(max_length=250, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'my_visitas'
+    def __init__(self, arg):
+        super(Visitas, self).__init__()
+        self.arg = arg
 
