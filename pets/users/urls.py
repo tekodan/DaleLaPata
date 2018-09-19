@@ -3,10 +3,14 @@ from django.contrib.auth.views import LogoutView
 
 from . import views
 
+from users.admin import fundacion_admin_site
+#admin.autodiscover()
+
 urlpatterns = [
     
-    #url(r'^$fundacion', views.CreateFundacionView.as_view(), name='createFundacion'),
+    #url(r'^$fundacion', views.CreateFundacionView.as_view(), name='createFundacion'), 
     url(r'^$', views.SelectCreate, name='createSelect'),
+    url(r'^fundacion-admin/$', fundacion_admin_site.urls),
     url(r'^normal$', views.CreateUserView.as_view(), name='create'),
     url(r'^fundacion$', views.CreateFundacionView, name='createFundacion'),
     url(r'^profile/(?P<pk>[0-9]+)/$', views.ProfileDetailView.as_view(), name='user_profile'),
