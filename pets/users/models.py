@@ -28,9 +28,8 @@ class Fundacion(models.Model):
                                validators=[])
     contrato_base = models.CharField(max_length=250, blank=True, null=True)
 
-    def __init__(self, arg):
-        super(Fundacion, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.razon_social
 
     def __str__(self):
         return str(self.num_identificacion)+str(' - ')+str(self.razon_social)

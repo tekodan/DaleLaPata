@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import OwnerProfile
+from users.models import OwnerProfile, Fundacion
 
 
 class OwnerProfileAdmin(admin.ModelAdmin):
@@ -20,3 +20,4 @@ class OwnerProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OwnerProfile, OwnerProfileAdmin)
+admin.site.register(Fundacion)

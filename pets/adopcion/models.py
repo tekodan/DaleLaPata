@@ -15,17 +15,15 @@ class Contratos(models.Model):
     adjunto = models.CharField(max_length=250)
     estado = models.CharField(max_length=100, blank=True, null=True)
 
-    def __init__(self, arg):
-        super(Contratos, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.fecha
 
 class TipoRelacion(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=250)
 
-    def __init__(self, arg):
-        super(TipoRelacion, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.nombre
 
 class Relacion(models.Model):
     usuario = models.ForeignKey(OwnerProfile, models.DO_NOTHING, db_column='usuario', primary_key=True)
@@ -34,13 +32,11 @@ class Relacion(models.Model):
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
     contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos', blank=True, null=True)
 
-    def __init__(self, arg):
-        super(Relacion, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.tipo_relacion.nombre
 
     class Meta:
         managed = False
-        db_table = 'relacion'
         unique_together = (('usuario', 'mascota'),)
 
     def get_contratos(self):
@@ -52,9 +48,8 @@ class Seguimiento(models.Model):
     observaciones = models.CharField(max_length=250, blank=True, null=True)
     adjuntos = models.CharField(max_length=250, blank=True, null=True)
 
-    def __init__(self, arg):
-        super(Seguimiento, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.fecha
 
 class Visitas(models.Model):
     contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')
@@ -63,7 +58,6 @@ class Visitas(models.Model):
     observaciones = models.CharField(max_length=250)
     adjuntos = models.CharField(max_length=250, blank=True, null=True)
 
-    def __init__(self, arg):
-        super(Visitas, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.fecha
 
