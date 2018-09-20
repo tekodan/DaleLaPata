@@ -119,6 +119,8 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context['object'] = self.request.user
         context['fundacion'] = self.request.user.fundacion
         context['pets'] = self.request.user.pet_set.all()
+        #pets_fundacion=self.request.user.fundacion.pet_set.all()
+        #context['pets_fundacion']=pets_fundacion
         return context
 
 
