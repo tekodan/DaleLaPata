@@ -5,6 +5,8 @@ from adopcion.models import Relacion, TipoRelacion
 import logging
 from django.utils import timezone
 
+from django.views.generic import CreateView, TemplateView, UpdateView, DetailView
+
 def post_new(request, pk):
     log=logging.getLogger(__name__)
     pet = Pet.objects.get(id=int(pk))
@@ -17,7 +19,7 @@ def post_new(request, pk):
             ownerprofile.username=ownerprofile.num_identificacion
             ownerprofile.password=12345
             ownerprofile.save()
-            tipor = TipoRelacion.objects.get(id=int(1))
+            tipor = TipoRelacion.objects.get(nombre='Postulación')
 
             relacion=Relacion()
             relacion.usuario=ownerprofile
@@ -31,6 +33,7 @@ def post_new(request, pk):
             #OwnerProfile.last_name = timezone.now()
             #return redirect('post_detail', pk=post.pk)
             log.info("ENTRO")
+            #context['fundacion'] = self.request.user.fundacion
             return render(request, 'adopcion/done.html', {'pet_nombre': pet.name, 'pet_slug': pet.slug, 'user_name': str(ownerprofile.first_name)+str(' ')+str(ownerprofile.last_name),'form': form})
         else:
             return render(request, 'adopcion/home.html', {'form': form})

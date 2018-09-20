@@ -23,14 +23,26 @@ class UserForm(forms.ModelForm):
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
-        self.fields['fundacion'].required = True
-        self.fields['rol'].required = True
-        self.fields['tipo_identificacion'].required = True
-        self.fields['num_identificacion'].required = True
+        #self.fields['fundacion'].required = True
+        #self.fields['rol'].required = True
+        #self.fields['tipo_identificacion'].required = True
+        #self.fields['num_identificacion'].required = True
         self.fields['facebook'].help_text = _(
             'Click <a href="#" data-toggle="modal" data-target="#ajuda-facebook">'
             'here</a> to get help filling this field.')
         self.fields['phone'].widget.attrs.update({'class': 'form-control'})
+
+class FundacionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FundacionForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
+        self.fields['logo'].widget.attrs.update({'class': 'form-control'})
+        self.fields['facebook'].widget.attrs.update({'class': 'form-control'})
+        self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
+        self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
 
 def _build_choice_field(label, choices=None, required=False):
     empty_choice = (('', '------------'),)
@@ -114,6 +126,20 @@ class RegisterFormFund(forms.ModelForm):
         model = Fundacion
         fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
                   'email', 'telefono', 'logo', 'facebook','twitter','contrato_base',)
+
+class UpdateFundacionForm(FundacionForm):
+    class Meta:
+        model = Fundacion
+        fields = ('razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter', 'contrato_base',)
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateFundacionForm, self).__init__(*args, **kwargs)
+        self.helper.add_input(Submit('submit', _('Save Changes')))
+
+    def save(self, commit=True):
+        self.instance.is_information_confirmed = True
+        super(UpdateFundacionForm, self).save()
+        
 
 class UpdateUserForm(UserForm):
     class Meta:

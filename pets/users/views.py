@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import CreateView, TemplateView, UpdateView, DetailView
 from password_reset.views import Recover, RecoverDone, Reset, ResetDone
 
-from users.forms import LoginForm, RegisterForm, UpdateUserForm, UsersPasswordRecoveryForm, UsersPasswordResetForm, RegisterFormFund
+from users.forms import LoginForm, RegisterForm, UpdateUserForm, UsersPasswordRecoveryForm, UsersPasswordResetForm, RegisterFormFund, UpdateFundacionForm
 from users.models import OwnerProfile, Fundacion
 from django.shortcuts import render
 
@@ -99,11 +99,23 @@ class EditUserProfileView(LoginRequiredMixin, UpdateView):
     form_class = UpdateUserForm
 
     def get_success_url(self):
-        messages.success(self.request, _('Changes saved successfully.'))
+        messages.success(self.request, _('Cambios guardados correctamente.'))
         return reverse('meupet:index')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+class EditFundacionProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'users/edit_fundacion_profile.html'
+    model = Fundacion
+    form_class = UpdateFundacionForm
+
+    def get_success_url(self):
+        messages.success(self.request, _('Cambios guardados correctamente.'))
+        return reverse('meupet:index')
+
+    def get_object(self, queryset=None):
+        return self.request.user.fundacion
 
 
 class UserLogin(LoginView):

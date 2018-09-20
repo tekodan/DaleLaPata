@@ -11,9 +11,17 @@ from users.models import OwnerProfile
 from django.utils.translation import ugettext_lazy as _
 
 class Contratos(models.Model):
+    E_01 = '1'
+    E_02 = '2'
+    E_03 = '3'
+    ESTADO = (
+        (E_01, _('Concertado')),
+        (E_02, _('Pendiente')),
+        (E_03, _('Anulado')),
+    )
     fecha = models.DateTimeField()
     adjunto = models.CharField(max_length=250)
-    estado = models.CharField(max_length=100, blank=True, null=True)
+    estado = models.CharField(max_length=1, choices=ESTADO, blank=True)
 
     def __str__(self):
         return self.fecha
@@ -36,7 +44,7 @@ class Relacion(models.Model):
         unique_together = ('usuario', 'mascota')
 
     def __str__(self):
-        return self.tipo_relacion.nombre
+        return self.tipo_relacion.nombre+str(' - ')+self.usuario.first_name+str(' & ')+self.mascota.name
 
 class Seguimiento(models.Model):
     contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')

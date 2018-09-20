@@ -29,8 +29,8 @@
         {% endif %}
       </ul>
 
-      {% if user.is_authenticated and user.id == object.id %}
-        <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
+      {% if user.is_authenticated and user.id == object.id and user.is_responsable %}
+        <a href="{% url 'users:edit_fundacion' %}" class="btn btn-primary">{% trans 'Modificar' %}</a>
       {% endif %}
 
     </div>
@@ -60,7 +60,7 @@
       </ul>
 
       {% if user.is_authenticated and user.id == object.id %}
-        <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
+        <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Editar' %}</a>
       {% endif %}
     </div>
  </div>

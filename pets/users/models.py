@@ -65,5 +65,10 @@ class OwnerProfile(AbstractUser):
     def get_rol(self):
         return dict(self.TIPO_ROL).get(self.rol)
 
+    def is_responsable(self):
+        if dict(self.TIPO_ROL).get(self.rol)=='Responsable' :
+            return True
+        return False
+
     def __str__(self):
         return self.username

@@ -24,6 +24,14 @@ class PetAdmin(admin.ModelAdmin):
         'city__state',
     )
 
+    def get_queryset(self, request):        
+        query = super(PetAdmin, self).get_queryset(request)
+        filtered_query = query.filter() 
+        if not request.user.is_superuser :
+            filtered_query = query.filter(fundacion=request.user.fundacion.id)  
+            #exclude = ('is_superuser',)
+        return filtered_query
+
 
 admin.site.register(models.Pet, PetAdmin)
 admin.site.register(models.Kind)

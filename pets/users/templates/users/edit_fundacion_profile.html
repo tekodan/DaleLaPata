@@ -1,7 +1,7 @@
 {% extends '_layouts/base.html' %}
 {% load i18n crispy_forms_tags static %}
 
-{% block title %}{% trans 'Editar perfil de usuario' %}{% endblock %}
+{% block title %}{% trans 'Editar perfil de fundacion' %}{% endblock %}
 
 {% block content %}
   <div id="ajuda-facebook" class="modal fade" tabindex="-1">
@@ -41,6 +41,6 @@
     </div>
   </div>
 
-  <h4>{% trans 'Tu perfil' %}</h4>
+  <h4>{% trans 'Perfil' %}</h4>
   {% crispy form %}
 {% endblock %}

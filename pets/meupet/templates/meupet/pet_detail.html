@@ -132,10 +132,12 @@
                   {% csrf_token %}
                   <input name="pet_id" id="pet_id" value="{{ pet.id }}" type="hidden">
                   <input type="submit" class="btn btn-success" value="
-                            {% if pet.status.description == 'Mascota en adopción' %}
+                            {% if pet.status.code == 'Mascota para adopción' %}
                               {% trans 'Postularse' %}
-                            {% else %}
-                              {% trans 'La encontre!' %}
+                            {% else %} 
+                              {% if pet.status.code == 'Extraviada' %}
+                                {% trans 'La encontre!' %}
+                              {% endif %}
                             {% endif %}"
 
                             {% if pet.status.final %}

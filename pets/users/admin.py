@@ -10,7 +10,8 @@ class OwnerProfileAdmin(admin.ModelAdmin):
         'last_name',
         'date_joined',
         'last_login',
-        'is_information_confirmed',
+        #'is_information_confirmed',
+        'fundacion',
     )
     list_filter = (
         'date_joined',
