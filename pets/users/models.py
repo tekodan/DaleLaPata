@@ -13,8 +13,7 @@ class Fundacion(models.Model):
         (NIT, _('NIT')),
     )
     tipo_identificacion = models.CharField(max_length=3,
-                                           choices=TIPO_ID,
-                                           blank=True)
+                                           choices=TIPO_ID)
     num_identificacion = models.CharField(unique=True,max_length=15)
     razon_social = models.CharField(max_length=250, blank=True, null=True)
     fecha_fundacion = models.DateTimeField(blank=True, null=True)

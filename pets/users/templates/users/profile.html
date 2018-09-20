@@ -35,7 +35,7 @@
 
     </div>
 
-  <div class="row">
+  
     <div class="col-md-6">
       <h4>{% trans 'Contactar ' %}</h4>
       <ul class="list-unstyled">
@@ -63,12 +63,12 @@
         <a href="{% url 'users:edit' %}" class="btn btn-primary">{% trans 'Edit' %}</a>
       {% endif %}
     </div>
+ </div>
 
     <div class="row">
     <div class="col-md-12">
       <h4>{% trans 'Mascotas registradas' %}</h4>
       {% include '_partials/pets_list.html' %}
     </div>
-
   </div>
 {% endblock %}

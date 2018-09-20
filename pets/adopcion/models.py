@@ -32,15 +32,11 @@ class Relacion(models.Model):
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
     contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos', blank=True, null=True)
 
+    class Meta:
+        unique_together = ('usuario', 'mascota')
+
     def __str__(self):
         return self.tipo_relacion.nombre
-
-    class Meta:
-        managed = False
-        unique_together = (('usuario', 'mascota'),)
-
-    def get_contratos(self):
-        return self.contratos.fecha
 
 class Seguimiento(models.Model):
     contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')

@@ -23,6 +23,10 @@ class UserForm(forms.ModelForm):
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['email'].required = True
+        self.fields['fundacion'].required = True
+        self.fields['rol'].required = True
+        self.fields['tipo_identificacion'].required = True
+        self.fields['num_identificacion'].required = True
         self.fields['facebook'].help_text = _(
             'Click <a href="#" data-toggle="modal" data-target="#ajuda-facebook">'
             'here</a> to get help filling this field.')

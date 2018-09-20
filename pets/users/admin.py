@@ -18,7 +18,7 @@ class OwnerProfileAdmin(admin.ModelAdmin):
         'is_information_confirmed'
     )
 
-    #cuando es superusuario muestra todos los users
+    #cuando es superusuario muestra todos los users, cuando no, solo los de su fundacion
     def get_queryset(self, request):        
         query = super(OwnerProfileAdmin, self).get_queryset(request)
         filtered_query = query.filter() 
@@ -27,12 +27,30 @@ class OwnerProfileAdmin(admin.ModelAdmin):
             #exclude = ('is_superuser',)
         return filtered_query
 
-    def set_exclude(self, request):     
-        field=''
-        if not request.user.is_superuser :
-            field='is_superuser'
-        return field
+class FundacionAdmin(admin.ModelAdmin):
 
+    #cuando es superusuario muestra todos las fundaciones, cuando no, solo su fundacion
+    def get_queryset(self, request):        
+        query = super(FundacionAdmin, self).get_queryset(request)
+        filtered_query = query.filter() 
+        if not request.user.is_superuser :
+            filtered_query = query.filter(id=request.user.fundacion.id)  
+            #exclude = ('is_superuser',)
+        return filtered_query
+
+    #si no es superusuario se deshabilita añadir fundacion    
+    def has_add_permission(self, request, obj=None):
+        if not request.user.is_superuser :
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        if not request.user.is_superuser :
+            return False
+        return True
+
+admin.site.register(OwnerProfile, OwnerProfileAdmin)
+admin.site.register(Fundacion, FundacionAdmin)
 
 #segundo admin
 """
@@ -113,5 +131,4 @@ fundacion_admin_site = AdminFundacion(name='fundacion-admin')
 fundacion_admin_site.register(Fundacion,FundacionAdmin)
 #fundacion_admin_site.register(OwnerProfile,UserAdmin)
 """
-admin.site.register(OwnerProfile, OwnerProfileAdmin)
-admin.site.register(Fundacion)
+
