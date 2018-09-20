@@ -13,13 +13,14 @@ from django.contrib import admin
 #    url(r'^admin/', include(admin.site.urls)),
 #    url(r'^', include('common.urls', namespace='common')),
 #]
-
+admin.autodiscover()
 urlpatterns = [
     url(r'^pets/', include(('meupet.urls', 'meupet'), namespace='meupet')),
     url(r'^social/', include(('social_django.urls', 'social'), namespace='social')),
     url(r'^user/', include(('users.urls', 'users'), namespace='users')),
     url(r'^api/', include(('api.urls', 'api'), namespace='api')),
     url(r'^admin/', admin.site.urls),
+    
     url(r'^', include(('common.urls', 'common'), namespace='common')),
 
     url(r'^adopcion/', include(('adopcion.urls', 'adopcion'), namespace='adopcion')),
