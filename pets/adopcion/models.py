@@ -10,7 +10,7 @@ from meupet.models import Pet
 from users.models import OwnerProfile
 from django.utils.translation import ugettext_lazy as _
 
-class Contratos(models.Model):
+class Contratos_Fundacion(models.Model):
     E_01 = '1'
     E_02 = '2'
     E_03 = '3'
@@ -18,13 +18,65 @@ class Contratos(models.Model):
         (E_01, _('Concertado')),
         (E_02, _('Pendiente')),
         (E_03, _('Anulado')),
-    )
+    ) 
+    objeto = models.CharField(max_length=250)   
     fecha = models.DateTimeField()
-    adjunto = models.CharField(max_length=250)
-    estado = models.CharField(max_length=1, choices=ESTADO, blank=True)
+    observaciones = models.CharField(max_length=1000)
+    estado = models.CharField(max_length=1, choices=ESTADO)
 
     def __str__(self):
-        return self.fecha
+        return self.objeto
+
+class Adjuntos_Contratos_Fundacion(models.Model):
+    contrato = models.ForeignKey(Contratos_Fundacion, models.DO_NOTHING, db_column='contrato')
+    adjunto = models.ImageField(upload_to='fundacion_contratos',
+                                        help_text=_('Maximo tamaño de imagen 8mb'))
+
+    def __str__(self):
+        return self.id
+
+class ContratoBase(models.Model):
+    nombre = models.CharField(max_length=250)
+    fecha_agregado = models.DateTimeField()
+    descripcion = models.CharField(max_length=1000)
+    observaciones = models.CharField(max_length=1000)
+    
+    def __str__(self):
+        return self.nombre
+
+class Clausulas_Base(models.Model):
+    contrato = models.ForeignKey(ContratoBase, models.DO_NOTHING, db_column='contrato_base')
+    nombre = models.CharField(max_length=250)
+    fecha_agregado = models.DateTimeField()
+    descripcion = models.CharField(max_length=250)
+    observaciones = models.CharField(max_length=1000,blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre
+
+class Clausulas_Fundacion(models.Model):
+    E_01 = '1'
+    E_02 = '2'
+    E_03 = '3'
+    ESTADO = (
+        (E_01, _('Aprobada')),
+        (E_02, _('Pendiente')),
+        (E_03, _('Anulada')),
+    )
+    T_01 = '1'
+    T_02 = '2'
+    TIPO = (
+        (T_01, _('Adicional')),
+        (T_02, _('Anulada')),
+    )
+    nombre = models.CharField(max_length=250)
+    fecha_agregado = models.DateTimeField()
+    descripcion = models.CharField(max_length=250)
+    observaciones = models.CharField(max_length=1000,blank=True, null=True)
+    estado = models.CharField(max_length=1, choices=ESTADO)
+
+    def __str__(self):
+        return self.nombre
 
 class TipoRelacion(models.Model):
     nombre = models.CharField(max_length=50)
@@ -38,7 +90,7 @@ class Relacion(models.Model):
     mascota = models.ForeignKey(Pet, models.DO_NOTHING, db_column='mascota')
     fecha = models.DateTimeField()
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
-    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos', blank=True, null=True)
+    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion', blank=True, null=True)
 
     class Meta:
         unique_together = ('usuario', 'mascota')
@@ -47,7 +99,7 @@ class Relacion(models.Model):
         return self.tipo_relacion.nombre+str(' - ')+self.usuario.first_name+str(' & ')+self.mascota.name
 
 class Seguimiento(models.Model):
-    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')
+    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion')
     fecha = models.DateTimeField()
     observaciones = models.CharField(max_length=250, blank=True, null=True)
     adjuntos = models.CharField(max_length=250, blank=True, null=True)
@@ -56,7 +108,7 @@ class Seguimiento(models.Model):
         return self.fecha
 
 class Visitas(models.Model):
-    contratos = models.ForeignKey('Contratos', models.DO_NOTHING, db_column='contratos')
+    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion')
     fecha_visita = models.DateTimeField()
     fecha_prox_visita = models.DateTimeField(blank=True, null=True)
     observaciones = models.CharField(max_length=250)
