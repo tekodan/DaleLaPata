@@ -143,7 +143,8 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         context['pets'] = self.object.pet_set.all()
-        context['fundacion'] = self.request.user.fundacion
+        #if self.request.user.is_authenticated:
+        context['fundacion'] = self.object.fundacion
         return context
 
 

@@ -38,7 +38,7 @@ class Adjuntos_Contratos_Fundacion(models.Model):
 class ContratoBase(models.Model):
     nombre = models.CharField(max_length=250)
     fecha_agregado = models.DateTimeField()
-    descripcion = models.CharField(max_length=1000)
+    descripcion = models.TextField(max_length=2000)
     observaciones = models.CharField(max_length=1000)
     
     def __str__(self):
@@ -48,7 +48,7 @@ class Clausulas_Base(models.Model):
     contrato = models.ForeignKey(ContratoBase, models.DO_NOTHING, db_column='contrato_base')
     nombre = models.CharField(max_length=250)
     fecha_agregado = models.DateTimeField()
-    descripcion = models.CharField(max_length=250)
+    descripcion = models.TextField(max_length=2000)
     observaciones = models.CharField(max_length=1000,blank=True, null=True)
 
     def __str__(self):
@@ -71,7 +71,7 @@ class Clausulas_Fundacion(models.Model):
     )
     nombre = models.CharField(max_length=250)
     fecha_agregado = models.DateTimeField()
-    descripcion = models.CharField(max_length=250)
+    descripcion = models.TextField(max_length=2000)
     observaciones = models.CharField(max_length=1000,blank=True, null=True)
     estado = models.CharField(max_length=1, choices=ESTADO)
 

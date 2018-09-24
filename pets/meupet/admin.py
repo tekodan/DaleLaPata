@@ -24,6 +24,7 @@ class PetAdmin(admin.ModelAdmin):
         'city__state',
     )
 
+    #en caso de no ser superusuario solo mostrar las pets correspondientes a su fundacion
     def get_queryset(self, request):        
         query = super(PetAdmin, self).get_queryset(request)
         filtered_query = query.filter() 

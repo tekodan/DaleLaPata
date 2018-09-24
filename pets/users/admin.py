@@ -28,8 +28,12 @@ class OwnerProfileAdmin(admin.ModelAdmin):
             #exclude = ('is_superuser',)
         return filtered_query
 
-class FundacionAdmin(admin.ModelAdmin):
+    #def __init__( self, request,):
+    #   if not request.user.is_superuser :
+    #        exclude = ('is_superuser', 'is_staff',)
 
+class FundacionAdmin(admin.ModelAdmin):
+    #actions_on_bottom = False
     #cuando es superusuario muestra todos las fundaciones, cuando no, solo su fundacion
     def get_queryset(self, request):        
         query = super(FundacionAdmin, self).get_queryset(request)

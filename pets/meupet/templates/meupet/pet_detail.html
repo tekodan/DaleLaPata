@@ -39,7 +39,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Cancel' %}</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Cancelar' %}</button>
 
           <form action="{% url 'meupet:delete_pet' pet.slug %}" method="post" class="form-inline">
             {% csrf_token %}
