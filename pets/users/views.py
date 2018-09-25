@@ -16,7 +16,6 @@ from django.shortcuts import render
 def SelectCreate(request):
     return render(request, 'users/SelectCreate.html')
 
-
 class RecoverView(Recover):
     template_name = 'users/recover.html'
     form_class = UsersPasswordRecoveryForm

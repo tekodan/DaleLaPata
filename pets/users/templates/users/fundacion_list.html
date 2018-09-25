@@ -1,0 +1,18 @@
+<h1>Cursos de Platzi</h1>
+
+<p>
+    <a href="{% url "users:f_new" %}">Agregar curso</a>
+</p>
+
+<ul>
+    {% for fundacion in object_list %}
+        <li>
+            <p>{{ fundacion.razon_social }}</p>
+            <p>
+                <a href="{% url "users:f_detail" fundacion.id %}">Ver</a> | 
+                <a href="{% url "users:f_edit" fundacion.id %}">Editar</a> | 
+                <a href="{% url "users:f_delete" fundacion.id %}">Borrar</a> 
+            </p>
+        </li>
+    {% endfor %}
+</ul>

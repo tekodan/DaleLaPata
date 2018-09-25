@@ -1,16 +1,27 @@
 from django.conf.urls import url
 from django.contrib.auth.views import LogoutView
 
-from . import views
+from . import views, admin_views
 
-#from users.admin import fundacion_admin_site
+from users.admin import AdminFundacion
+from django.contrib import admin
 #admin.autodiscover()
+
+from .admin_views import (
+    FundacionList,
+    FundacionDetail,
+    FundacionCreation,
+    FundacionUpdate,
+    FundacionDelete
+)
 
 urlpatterns = [
     
     #url(r'^$fundacion', views.CreateFundacionView.as_view(), name='createFundacion'), 
-    url(r'^$', views.SelectCreate, name='createSelect'),
-    #url(r'^fundacion-admin/$', fundacion_admin_site.urls),
+    #url(r'^blabla$', admin_views.report),
+    url(r'^fundacion-admin/$', AdminFundacion.urls),
+    url(r'^$', views.SelectCreate, name='createSelect'), 
+    
     url(r'^normal$', views.CreateUserView.as_view(), name='create'),
     url(r'^fundacion$', views.CreateFundacionView, name='createFundacion'),
     url(r'^profile/(?P<pk>[0-9]+)/$', views.ProfileDetailView.as_view(), name='user_profile'),
@@ -24,4 +35,11 @@ urlpatterns = [
     url(r'^recover/reset/done/$', views.RecoverResetDoneView.as_view(), name='recover_password_done'),
     url(r'^recover/reset/(?P<token>.+)/$', views.RecoverResetView.as_view(), name='recover_password_reset'),
     url(r'^recover/(?P<signature>.+)/$', views.RecoverDoneView.as_view(), name='recover_password_sent'),
+
+    #Urls para el crud
+    url(r'^prueba/$', FundacionList.as_view(), name='f_list'),
+    url(r'^(?P<pk>\d+)$', FundacionDetail.as_view(), name='f_detail'),
+    url(r'^nuevo$', FundacionCreation.as_view(), name='f_new'),
+    url(r'^editar/(?P<pk>\d+)$', FundacionUpdate.as_view(), name='f_edit'),
+    url(r'^borrar/(?P<pk>\d+)$', FundacionDelete.as_view(), name='f_delete'),
 ]
