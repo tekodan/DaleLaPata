@@ -11,26 +11,41 @@ from django.views.generic.edit import (
     DeleteView
 )
 
-class FundacionList(ListView):
-    model = Fundacion
+from adopcion.models import Relacion
 
+from django.shortcuts import get_list_or_404, get_object_or_404
 
-class FundacionDetail(DetailView):
-    model = Fundacion
+class OwnerProfileList(ListView):
+    model = OwnerProfile
+    #template_name="users/ownerprofile_list.html"
 
+    def get_queryset(self, *args, **kwargs):
+        qs = OwnerProfile.objects.all()
+        qs = qs.filter(fundacion=self.request.user.fundacion)
+        return qs
 
-class FundacionCreation(CreateView):
-    model = Fundacion
+class PostulanteList(ListView):
+    model = Relacion
+    #template_name="users/ownerprofile_list.html"
+
+    def get_queryset(self, *args, **kwargs):
+        qs = Relacion.objects.filter(mascota__fundacion=self.request.user.fundacion)
+        return qs
+
+class OwnerProfileDetail(DetailView):
+    model = OwnerProfile
+
+class OwnerProfileCreation(CreateView):
+    model = OwnerProfile
     success_url = reverse_lazy('users:f_list')
-    fields = ['tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion', 'email', 'telefono', 'logo', 'facebook', 'twitter']
+    fields = ['tipo_identificacion', 'num_identificacion', 'first_name', 'last_name', 'username','email', 'phone', 'facebook']
 
-class FundacionUpdate(UpdateView):
-    model = Fundacion
+class OwnerProfileUpdate(UpdateView):
+    model = OwnerProfile
     success_url = reverse_lazy('users:f_list')
-    fields = ['razon_social', 'fecha_fundacion', 'email', 'telefono', 'logo', 'facebook', 'twitter']
+    fields = ['first_name', 'last_name', 'email', 'phone', 'facebook']
 
-class FundacionDelete(DeleteView):
-    model = Fundacion
+class OwnerProfileDelete(DeleteView):
+    model = OwnerProfile
     success_url = reverse_lazy('users:f_list')
-
 

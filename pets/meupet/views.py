@@ -104,7 +104,7 @@ class RegisterPetView(LoginRequiredMixin, CreateView):
         try:
             return super().post(request, *args, **kwargs)
         except IntegrityError:
-            messages.info(request, _('You already have a pet registered with this name.'))
+            messages.info(request, _('Ya tienes una mascota registrada con este nombre.'))
             return HttpResponseRedirect(reverse('users:profile'))
 
     def form_valid(self, form):

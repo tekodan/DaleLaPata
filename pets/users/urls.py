@@ -8,11 +8,13 @@ from django.contrib import admin
 #admin.autodiscover()
 
 from .admin_views import (
-    FundacionList,
-    FundacionDetail,
-    FundacionCreation,
-    FundacionUpdate,
-    FundacionDelete
+    OwnerProfileList,
+    OwnerProfileDetail,
+    OwnerProfileCreation,
+    OwnerProfileUpdate,
+    OwnerProfileDelete,
+
+    PostulanteList
 )
 
 urlpatterns = [
@@ -37,9 +39,13 @@ urlpatterns = [
     url(r'^recover/(?P<signature>.+)/$', views.RecoverDoneView.as_view(), name='recover_password_sent'),
 
     #Urls para el crud
-    url(r'^prueba/$', FundacionList.as_view(), name='f_list'),
-    url(r'^(?P<pk>\d+)$', FundacionDetail.as_view(), name='f_detail'),
-    url(r'^nuevo$', FundacionCreation.as_view(), name='f_new'),
-    url(r'^editar/(?P<pk>\d+)$', FundacionUpdate.as_view(), name='f_edit'),
-    url(r'^borrar/(?P<pk>\d+)$', FundacionDelete.as_view(), name='f_delete'),
+    url(r'^prueba/$', OwnerProfileList.as_view(), name='f_list'),
+    
+    url(r'^(?P<pk>\d+)$', OwnerProfileDetail.as_view(), name='f_detail'),
+    url(r'^nuevo$', OwnerProfileCreation.as_view(), name='f_new'),
+    url(r'^editar/(?P<pk>\d+)$', OwnerProfileUpdate.as_view(), name='f_edit'),
+    url(r'^borrar/(?P<pk>\d+)$', OwnerProfileDelete.as_view(), name='f_delete'),
+
+    url(r'^prueba/postulantes$', PostulanteList.as_view(), name='r_list'),
+    
 ]

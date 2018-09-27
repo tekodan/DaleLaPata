@@ -17,7 +17,7 @@ class Fundacion(models.Model):
     num_identificacion = models.CharField(unique=True,max_length=15)
     razon_social = models.CharField(max_length=250, blank=True, null=True)
     fecha_fundacion = models.DateTimeField(blank=True, null=True)
-    email = models.CharField(unique=True, max_length=250)
+    email = models.EmailField(unique=True, max_length=250)
     telefono = models.CharField(max_length=250, blank=True, null=True)
     logo = models.ImageField(upload_to='fundacion_profiles',
                                         help_text=_('Maximo tamaño de imagen 8mb'), blank=True, null=True)
@@ -69,6 +69,9 @@ class OwnerProfile(AbstractUser):
         if dict(self.TIPO_ROL).get(self.rol)=='Responsable' :
             return True
         return False
+
+    def nombre_completo(self):
+        return str(self.first_name)+str(' ')+str(self.last_name)
 
     def __str__(self):
         return self.username

@@ -1,0 +1,47 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+<li class="header">{% block nav_heading %}Panel navegación{% endblock %}</li>
+{% block nav_links %}
+    <li>
+        <a href="/some/url">
+            <i class="fa fa-dashboard"></i> <span>Inicio</span>
+        </a>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-paw"></i> <span>Adopción</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{% url "users:r_list" %}">
+                    <i class="fa fa-user"></i> Postulantes
+                </a>
+                <a href="#">
+                    <i class="fa fa-file"></i> Contratos
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-paw"></i> <span>Usuarios</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i> Vinculados
+                </a>
+                <a href="#">
+                    <i class="fa fa-file"></i> Brigadistas
+                </a>
+            </li>
+        </ul>
+    </li>
+{% endblock nav_links %}

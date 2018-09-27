@@ -13,7 +13,7 @@ from django.contrib import admin
 #    url(r'^admin/', include(admin.site.urls)),
 #    url(r'^', include('common.urls', namespace='common')),
 #]
-admin.autodiscover()
+#admin.autodiscover()
 urlpatterns = [
     url(r'^pets/', include(('meupet.urls', 'meupet'), namespace='meupet')),
     url(r'^social/', include(('social_django.urls', 'social'), namespace='social')),
