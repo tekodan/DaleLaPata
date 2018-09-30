@@ -24,13 +24,10 @@ class OwnerProfileAdmin(admin.ModelAdmin):
         query = super(OwnerProfileAdmin, self).get_queryset(request)
         filtered_query = query.filter() 
         if not request.user.is_superuser :
+            _exclude_ = ('is_superuser',)
             filtered_query = query.filter(fundacion=request.user.fundacion.id)  
-            #exclude = ('is_superuser',)
+            #
         return filtered_query
-
-    #def __init__( self, request,):
-    #   if not request.user.is_superuser :
-    #        exclude = ('is_superuser', 'is_staff',)
 
 class FundacionAdmin(admin.ModelAdmin):
     #actions_on_bottom = False
@@ -53,6 +50,26 @@ class FundacionAdmin(admin.ModelAdmin):
         if not request.user.is_superuser :
             return False
         return True
+
+
+
+from django.contrib.admin import AdminSite
+from django.http import HttpResponseRedirect
+from django.conf.urls import url
+class AdminFundacion(AdminSite):
+    site_header = "Administracion de fundación"
+    #site_title = "Bienvenido a la gestion de "
+    #index_title = "Bienvenido a la gestion de"
+
+    def has_permission(self, request):
+        if request.user.is_active : 
+            if request.user.rol=='1' :
+                self.index_title="Bienvenido a la gestion de "+str(request.user.fundacion)              
+                return request.user.is_active
+
+AdminFundacion = AdminFundacion(name='fundacion-admin')
+AdminFundacion.register(Fundacion,FundacionAdmin)
+
 
 admin.site.register(OwnerProfile, OwnerProfileAdmin)
 admin.site.register(Fundacion, FundacionAdmin)

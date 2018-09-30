@@ -1,0 +1,9 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}Formulario{% endblock %}
+{% block content %}
+	<form method="post">{% csrf_token %}
+	    ¿Estás seguro que deseas borrar el curso "{{ object }}"?
+	    <input type="submit" value="Borrar registro" />
+	</form>
+{% endblock %}

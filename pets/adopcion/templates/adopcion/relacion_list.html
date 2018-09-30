@@ -1,0 +1,41 @@
+{% extends 'adminlte/base.html' %}
+
+{% block logo %}
+    <div class="login-logo">
+    <a href="{% block logo_href %}/{% endblock %}">
+        {% block logo_text %}<b>Dale</b>La Pata{% endblock %}</a>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
+{% block content %}
+    <button><a href="{% url "users:f_new"%}">Agregar usuario</a></button>
+    <div class="table-responsive">          
+      <table id="myTable" class="table">
+        <thead>
+          <tr class="clickable-row">
+            <th>Id. Postulante</th>
+            <th>Postulante</th>
+            <th>Chip Mascota</th>
+            <th>Mascota</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for relacion in object_list %}
+          <tr>
+            <td> {{ relacion.usuario.num_identificacion }} </td>
+            <td><a href="{{ relacion.usuario.get_absolute_url }}"> {{ relacion.usuario.nombre_completo }} </a></td>
+            <td>{{ relacion.chip_id }}</td>
+            <td><a href="{{ relacion.mascota.get_absolute_url }}"> {{ relacion.mascota }} </a></td>
+            <td>{{ relacion.fecha }}</td>
+            <td><a href="">Ver</a> | <a href="">Contrato Adopción</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+

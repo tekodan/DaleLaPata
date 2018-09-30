@@ -1,0 +1,45 @@
+{% extends 'adminlte/base.html' %}
+
+{% block logo %}
+    <div class="login-logo">
+    <a href="{% block logo_href %}/{% endblock %}">
+        {% block logo_text %}<b>Dale</b>La Pata{% endblock %}</a>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
+{% block content %}
+    <button><a href="{% url "users:f_new"%}">Agregar usuario</a></button>
+    <div class="table-responsive">          
+      <table id="myTable" class="table">
+        <thead>
+          <tr class="clickable-row">
+            <th>Tipo Id</th>
+            <th>Numero Id</th>
+            <th>Razon social</th>
+            <th>Email</th>
+            <th>Facebook</th>
+            <th>Twitter</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ownerprofile in object_list %}
+          <tr>
+            <td>{{ ownerprofile.tipo_identificacion }}</td>
+            <td>{{ ownerprofile.num_identificacion }}</td>
+            <td>{{ ownerprofile.first_name }}</td>
+            <td>{{ ownerprofile.last_name }}</td>
+            <td>{{ ownerprofile.facebook }}</td>
+            <td>{{ ownerprofile.rol.nombre }}</td>
+            <td><a href="{% url "users:f_detail" ownerprofile.id %}">Ver</a>| 
+                <a href="{% url "users:f_edit" ownerprofile.id %}">Editar</a>|
+                <a href="{% url "users:f_delete" ownerprofile.id %}">Borrar</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+
