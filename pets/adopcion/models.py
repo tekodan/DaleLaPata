@@ -10,77 +10,44 @@ from meupet.models import Pet
 from users.models import OwnerProfile
 from django.utils.translation import ugettext_lazy as _
 
-class Contratos_Fundacion(models.Model):
-    E_01 = '1'
-    E_02 = '2'
-    E_03 = '3'
-    ESTADO = (
-        (E_01, _('Concertado')),
-        (E_02, _('Pendiente')),
-        (E_03, _('Anulado')),
-    ) 
+class Contratos(models.Model):  
+    BASE = '1'
+    PERSONALIZADO = '2'
+    TIPO = (
+        (BASE, _('Base')),
+        (PERSONALIZADO, _('Personalizado')),
+    )  
     objeto = models.CharField(max_length=250)   
-    fecha = models.DateTimeField()
-    observaciones = models.CharField(max_length=1000)
-    estado = models.CharField(max_length=1, choices=ESTADO)
+    fecha_creacion = models.DateTimeField()
+    descripcion = models.TextField()
+    observaciones = models.TextField(blank=True, null=True)
+    tipo = models.CharField(max_length=1, choices=TIPO)
+    contrato_base = models.OneToOneField('self', blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.objeto
 
-class Adjuntos_Contratos_Fundacion(models.Model):
-    contrato = models.ForeignKey(Contratos_Fundacion, models.DO_NOTHING, db_column='contrato')
-    adjunto = models.ImageField(upload_to='fundacion_contratos',
-                                        help_text=_('Maximo tamaño de imagen 8mb'))
-
-    def __str__(self):
-        return self.id
-
-class ContratoBase(models.Model):
-    nombre = models.CharField(max_length=250)
-    fecha_agregado = models.DateTimeField()
-    descripcion = models.TextField(max_length=2000)
-    observaciones = models.CharField(max_length=1000)
-    
-    def __str__(self):
-        return self.nombre
-
-class Clausulas_Base(models.Model):
-    contrato = models.ForeignKey(ContratoBase, models.DO_NOTHING, db_column='contrato_base')
-    nombre = models.CharField(max_length=250)
-    fecha_agregado = models.DateTimeField()
-    descripcion = models.TextField(max_length=2000)
-    observaciones = models.CharField(max_length=1000,blank=True, null=True)
-
-    def __str__(self):
-        return self.nombre
-
-class Clausulas_Fundacion(models.Model):
-    E_01 = '1'
-    E_02 = '2'
-    E_03 = '3'
-    ESTADO = (
-        (E_01, _('Aprobada')),
-        (E_02, _('Pendiente')),
-        (E_03, _('Anulada')),
-    )
-    T_01 = '1'
-    T_02 = '2'
+class Clausulas(models.Model):
+    BASE = '1'
+    PERSONALIZADO = '2'
     TIPO = (
-        (T_01, _('Adicional')),
-        (T_02, _('Anulada')),
-    )
+        (BASE, _('Base')),
+        (PERSONALIZADO, _('Personalizado')),
+    )  
     nombre = models.CharField(max_length=250)
-    fecha_agregado = models.DateTimeField()
-    descripcion = models.TextField(max_length=2000)
-    observaciones = models.CharField(max_length=1000,blank=True, null=True)
-    estado = models.CharField(max_length=1, choices=ESTADO)
+    fecha_creacion = models.DateTimeField()
+    descripcion = models.TextField()
+    observaciones = models.TextField(blank=True, null=True)
+    tipo = models.CharField(max_length=1, choices=TIPO)
+    contrato = models.ForeignKey('Contratos', models.DO_NOTHING)
 
     def __str__(self):
         return self.nombre
 
 class TipoRelacion(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=250)
+    descripcion = models.TextField(max_length=500)
+    observaciones = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -90,8 +57,7 @@ class Relacion(models.Model):
     mascota = models.ForeignKey(Pet, models.DO_NOTHING, db_column='mascota')
     fecha = models.DateTimeField()
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
-    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion', blank=True, null=True)
-
+ 
     class Meta:
         unique_together = ('usuario', 'mascota')
 
@@ -99,21 +65,40 @@ class Relacion(models.Model):
         return self.tipo_relacion.nombre+str(' - ')+self.usuario.first_name+str(' & ')+self.mascota.name
 
 class Seguimiento(models.Model):
-    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion')
+    EVIDENCIA = '1'
+    VISITA = '2'
+    CONTRATO = '3'
+    TIPO = (
+        (EVIDENCIA, _('Evidencia')),
+        (VISITA, _('Visita')),
+        (CONTRATO, _('Contrato')),
+    ) 
+    APROBACIÓN = '1'
+    ANULACIÓN = '2'
+    PENDIENTE = '3'
+    ANOMALIAS = '4'
+    ESTADO = (
+        (APROBACIÓN, _('Aprobación')),
+        (ANULACIÓN, _('Anulación')),
+        (PENDIENTE, _('Pendiente')),
+        (ANOMALIAS, _('Anomalias')),
+    ) 
+    tipo = models.CharField(max_length=1, choices=TIPO)
+    estado = models.CharField(max_length=1, choices=ESTADO)
     fecha = models.DateTimeField()
-    observaciones = models.CharField(max_length=250, blank=True, null=True)
-    adjuntos = models.CharField(max_length=250, blank=True, null=True)
+    descripcion = models.TextField(max_length=2000)
+    observaciones = models.TextField(max_length=2000, blank=True, null=True)
+    anterior = models.OneToOneField('self', blank=True, null=True, on_delete=models.PROTECT)
+    relacion = models.ForeignKey('Relacion', models.DO_NOTHING)
 
     def __str__(self):
         return self.fecha
 
-class Visitas(models.Model):
-    contratos = models.ForeignKey('Contratos_Fundacion', models.DO_NOTHING, db_column='Contratos_Fundacion')
-    fecha_visita = models.DateTimeField()
-    fecha_prox_visita = models.DateTimeField(blank=True, null=True)
-    observaciones = models.CharField(max_length=250)
-    adjuntos = models.CharField(max_length=250, blank=True, null=True)
+class Adjuntos_Seguimiento(models.Model):
+    seguimiento = models.ForeignKey(Seguimiento, models.DO_NOTHING)
+    adjunto = models.ImageField(upload_to='relacion_seguimiento',
+                                        help_text=_('Maximo tamaño de imagen 8mb'))
 
     def __str__(self):
-        return self.fecha
+        return self.id
 

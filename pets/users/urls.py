@@ -14,14 +14,17 @@ from .admin_views import (
     OwnerProfileUpdate,
     OwnerProfileDelete,
 
-    PostulanteList
+    PostulanteList,
+
+    ContratoList,
+    ContratoCreation
 )
 
 urlpatterns = [
     
     #url(r'^$fundacion', views.CreateFundacionView.as_view(), name='createFundacion'), 
     #url(r'^blabla$', admin_views.report),
-    url(r'^fundacion-admin/$', AdminFundacion.urls),
+    #url(r'^fundacion-admin/$', AdminFundacion.urls),
     url(r'^$', views.SelectCreate, name='createSelect'), 
     
     url(r'^normal$', views.CreateUserView.as_view(), name='create'),
@@ -39,13 +42,17 @@ urlpatterns = [
     url(r'^recover/(?P<signature>.+)/$', views.RecoverDoneView.as_view(), name='recover_password_sent'),
 
     #Urls para el crud
-    url(r'^prueba/$', OwnerProfileList.as_view(), name='f_list'),
+    url(r'^administrador/$', OwnerProfileList.as_view(), name='f_list'),
     
     url(r'^(?P<pk>\d+)$', OwnerProfileDetail.as_view(), name='f_detail'),
     url(r'^nuevo$', OwnerProfileCreation.as_view(), name='f_new'),
     url(r'^editar/(?P<pk>\d+)$', OwnerProfileUpdate.as_view(), name='f_edit'),
     url(r'^borrar/(?P<pk>\d+)$', OwnerProfileDelete.as_view(), name='f_delete'),
 
-    url(r'^prueba/postulantes$', PostulanteList.as_view(), name='r_list'),
-    
+    url(r'^administrador/postulantes$', PostulanteList.as_view(), name='r_list'),
+
+    url(r'^contratos/list$', ContratoList.as_view(), name='c_list'),
+
+    url(r'^contratos$', ContratoCreation.as_view(), name='c_new'),
+    #url(r'^contrato/(?P<pk>\d+)$', ContratoCreation.as_view(), name='c_new'),
 ]

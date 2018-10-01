@@ -42,7 +42,7 @@ class FundacionForm(forms.ModelForm):
         self.fields['logo'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update({'class': 'form-control'})
         self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
-        self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
+        #self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
 
 def _build_choice_field(label, choices=None, required=False):
     empty_choice = (('', '------------'),)
@@ -118,19 +118,19 @@ class RegisterFormFund(forms.ModelForm):
         self.fields['logo'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update({'class': 'form-control'})
         self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
-        self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
+        #self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update(
             {'placeholder': _('Ingrese la direccion completa de su usuario en Facebook')})
 
     class Meta:
         model = Fundacion
         fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
-                  'email', 'telefono', 'logo', 'facebook','twitter','contrato_base',)
+                  'email', 'telefono', 'logo', 'facebook','twitter',)
 
 class UpdateFundacionForm(FundacionForm):
     class Meta:
         model = Fundacion
-        fields = ('razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter', 'contrato_base',)
+        fields = ('razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter',)
 
     def __init__(self, *args, **kwargs):
         super(UpdateFundacionForm, self).__init__(*args, **kwargs)

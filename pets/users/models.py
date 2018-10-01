@@ -25,7 +25,7 @@ class Fundacion(models.Model):
                                validators=[])
     twitter = models.URLField(max_length=250, blank=True, null=True,
                                validators=[])
-    contrato_base = models.CharField(max_length=250, blank=True, null=True)
+    contratos = models.ForeignKey('adopcion.Contratos', models.DO_NOTHING)
 
     def __str__(self):
         return self.razon_social

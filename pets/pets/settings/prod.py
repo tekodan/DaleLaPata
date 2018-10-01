@@ -25,7 +25,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 DJANGO_APPS = (
     'django_adminlte',
-    'django_adminlte_theme',
+    #'django_adminlte_theme',
 
     'django.contrib.admin',
     'django.contrib.auth',
