@@ -18,8 +18,9 @@ def post_new(request, pk):
             ownerprofile = form.save(commit=False)
             ownerprofile.username=ownerprofile.num_identificacion
             ownerprofile.password=12345
-            ownerprofile.save()
             tipor = TipoRelacion.objects.get(nombre='Postulación')
+
+            ownerprofile.save()
 
             relacion=Relacion()
             relacion.usuario=ownerprofile

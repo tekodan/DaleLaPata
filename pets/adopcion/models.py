@@ -17,15 +17,24 @@ class Contratos(models.Model):
         (BASE, _('Base')),
         (PERSONALIZADO, _('Personalizado')),
     )  
-    objeto = models.CharField(max_length=250)   
+    ADOPCIÓN = '1'
+    HOGAR = '2'
+    APADRINAMIENTO = '2'
+    OBJETO = (
+        (ADOPCIÓN, _('Adopción')),
+        (HOGAR, _('Hogar de paso')),
+        (APADRINAMIENTO, _('Apadrinamiento')),
+    )  
+    nombre = models.CharField(max_length=250)
+    objeto = models.CharField(max_length=1, choices=OBJETO)   
     fecha_creacion = models.DateTimeField()
     descripcion = models.TextField()
     observaciones = models.TextField(blank=True, null=True)
     tipo = models.CharField(max_length=1, choices=TIPO)
-    contrato_base = models.OneToOneField('self', blank=True, null=True, on_delete=models.PROTECT)
+    contrato_base = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.objeto
+        return self.nombre
 
 class Clausulas(models.Model):
     BASE = '1'
@@ -95,6 +104,19 @@ class Seguimiento(models.Model):
         return self.fecha
 
 class Adjuntos_Seguimiento(models.Model):
+    """
+    CHOICES = (
+        ('Evidencia', ((1, 'Aprobación'), (2, 'Anulación'), (3, 'Anomalias'))),
+        ('Visita', ((4, 'Aprobación'), (5, 'Anomalias'), (6, '6'))),
+        ('Contrato', ((4, 'Aprobación'), (5, 'Anulación'), (6, 'Pendiente'))),
+    )
+
+    # Just the letters: (('A', 'A'), ('B', 'B'))
+    LETTER_CHOICES = tuple((l[0], l[0]) for l in CHOICES)
+
+    letter = models.CharField(max_length=1, choices=LETTER_CHOICES)
+    number = models.PositiveIntegerField(max_length=1, choices=CHOICES)
+    """
     seguimiento = models.ForeignKey(Seguimiento, models.DO_NOTHING)
     adjunto = models.ImageField(upload_to='relacion_seguimiento',
                                         help_text=_('Maximo tamaño de imagen 8mb'))

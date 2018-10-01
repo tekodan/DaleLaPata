@@ -17,7 +17,7 @@ from .admin_views import (
     PostulanteList,
 
     ContratoList,
-    ContratoCreation
+    IniciarContrato
 )
 
 urlpatterns = [
@@ -53,6 +53,6 @@ urlpatterns = [
 
     url(r'^contratos/list$', ContratoList.as_view(), name='c_list'),
 
-    url(r'^contratos$', ContratoCreation.as_view(), name='c_new'),
+    url(r'^contratos/(?P<m>(\d+))/(?P<u>(\d+))/$', IniciarContrato, name='c_new'),
     #url(r'^contrato/(?P<pk>\d+)$', ContratoCreation.as_view(), name='c_new'),
 ]

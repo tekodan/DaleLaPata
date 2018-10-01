@@ -1,0 +1,12 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n static %}
+{% block title %}{% trans 'Celebrar contrato' %}{% endblock %}
+
+    {% block content %}
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-success">Celebrar Contrato</button>
+            <br>
+        </form>
+        <br>
+    {% endblock %}

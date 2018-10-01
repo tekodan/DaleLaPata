@@ -12,6 +12,8 @@ from django.views.generic.edit import (
 )
 
 from adopcion.models import *
+from adopcion.forms import ContratoForm
+from django.shortcuts import render
 
 from django.shortcuts import get_list_or_404, get_object_or_404
 ##############################################
@@ -51,15 +53,27 @@ class AdopcionCreation(CreateView):
     #success_url = reverse_lazy('users:f_list')
     fields = ['tipo_identificacion', 'num_identificacion', 'first_name', 'last_name', 'username','email', 'phone', 'facebook']
 ##############################################
-class ContratoCreation(CreateView):
-    model = Contratos
-    success_url = reverse_lazy('users:r_list')
-    fields = ['descripcion_base','objeto', 'fecha', 'observaciones']
-    
-    def get_context_data(self, **kwargs):
-        context = super(ContratoCreation, self).get_context_data(**kwargs)
-        context['relacion'] = self.request.relacion
-        return context
+def IniciarContrato(request, m, u):
+    if request.method == "POST":
+
+        form = ContratoForm(request.POST)    
+        if form.is_valid():
+            seguimiento = form.save(commit=False)
+            
+
+            tipor = TipoRelacion.objects.get(nombre='Adopción')
+
+            relacion=Relacion.objects.get(mascota=m, usuario=u)
+            relacion.tipo_relacion = tipor
+
+            relacion.save(['tipo_relacion'])
+            return render(request, 'adopcion/contrato.html', {'form': form})
+        else:
+            return render(request, 'adopcion/contrato.html', {'form': form})
+           
+    else:
+        form = ContratoForm()
+        return render(request, 'adopcion/contrato.html', {'form': form})
     
 ##############################################
 class ContratoList(ListView):

@@ -37,7 +37,7 @@
             <td>{{ ownerprofile.facebook }}</td>
             <td>{{ ownerprofile.get_rol }}</td>
             {% if object.is_superuser %}
-             <td>{{ ownerprofile.fundacion.razon_social }}</td>
+             <td>{{ ownerprofile.fundacion.nombre_corto }}</td>
             {% endif %}
             <td><a href="{% url "users:f_detail" ownerprofile.id %}">Ver</a>| 
                 <a href="{% url "users:f_edit" ownerprofile.id %}">Editar</a>|

@@ -36,6 +36,7 @@ class FundacionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FundacionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['nombre_corto'].widget.attrs.update({'class': 'form-control'})
         self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
         self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
@@ -111,6 +112,7 @@ class RegisterFormFund(forms.ModelForm):
         super(RegisterFormFund, self).__init__(*args, **kwargs)
         self.fields['tipo_identificacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['num_identificacion'].widget.attrs.update({'class': 'form-control'})
+        self.fields['nombre_corto'].widget.attrs.update({'class': 'form-control'})
         self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
         self.fields['fecha_fundacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
@@ -124,13 +126,13 @@ class RegisterFormFund(forms.ModelForm):
 
     class Meta:
         model = Fundacion
-        fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
+        fields = ('tipo_identificacion', 'num_identificacion', 'nombre_corto', 'razon_social', 'fecha_fundacion',
                   'email', 'telefono', 'logo', 'facebook','twitter',)
 
 class UpdateFundacionForm(FundacionForm):
     class Meta:
         model = Fundacion
-        fields = ('razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter',)
+        fields = ('nombre_corto','razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter',)
 
     def __init__(self, *args, **kwargs):
         super(UpdateFundacionForm, self).__init__(*args, **kwargs)
