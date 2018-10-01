@@ -54,6 +54,7 @@ class AdopcionCreation(CreateView):
     fields = ['tipo_identificacion', 'num_identificacion', 'first_name', 'last_name', 'username','email', 'phone', 'facebook']
 ##############################################
 def IniciarContrato(request, m, u):
+    relacion=Relacion.objects.get(mascota=m, usuario=u)
     if request.method == "POST":
 
         form = ContratoForm(request.POST)    
@@ -63,14 +64,22 @@ def IniciarContrato(request, m, u):
 
             tipor = TipoRelacion.objects.get(nombre='Adopción')
 
-            relacion=Relacion.objects.get(mascota=m, usuario=u)
+            
             relacion.tipo_relacion = tipor
 
             relacion.save(['tipo_relacion'])
-            return render(request, 'adopcion/contrato.html', {'form': form})
+            return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
         else:
-            return render(request, 'adopcion/contrato.html', {'form': form})
+            return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
            
+    else:
+        form = ContratoForm()
+        return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
+###########
+def GenerarContrato(request, r):
+    if request.method == "POST":
+        relacion=Relacion.objects.get(id=int(r))        
+        return render(request, 'adopcion/contrato_template.html', {'relacion': relacion})           
     else:
         form = ContratoForm()
         return render(request, 'adopcion/contrato.html', {'form': form})

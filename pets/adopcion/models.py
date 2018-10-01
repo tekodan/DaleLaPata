@@ -32,6 +32,7 @@ class Contratos(models.Model):
     observaciones = models.TextField(blank=True, null=True)
     tipo = models.CharField(max_length=1, choices=TIPO)
     contrato_base = models.ForeignKey('self', blank=True, null=True, on_delete=models.PROTECT)
+    fundacion = models.ForeignKey('users.Fundacion', models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -62,7 +63,7 @@ class TipoRelacion(models.Model):
         return self.nombre
 
 class Relacion(models.Model):
-    usuario = models.ForeignKey(OwnerProfile, models.DO_NOTHING, db_column='usuario', primary_key=True)
+    usuario = models.ForeignKey(OwnerProfile, models.DO_NOTHING, db_column='usuario')
     mascota = models.ForeignKey(Pet, models.DO_NOTHING, db_column='mascota')
     fecha = models.DateTimeField()
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')

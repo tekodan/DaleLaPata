@@ -27,7 +27,6 @@ class Fundacion(models.Model):
                                validators=[])
     twitter = models.URLField(max_length=250, blank=True, null=True,
                                validators=[])
-    contratos = models.ForeignKey('adopcion.Contratos', models.DO_NOTHING, default=1)
 
     def __str__(self):
         return self.nombre_corto
@@ -39,13 +38,13 @@ class OwnerProfile(AbstractUser):
         (CC, _('Cedula ciudadania')),
         (TI, _('Tarjeta identidad')),
     )
-    R_01 = '1'
-    R_02 = '2'
-    R_03 = '3'
+    RESPONSABLE = '1'
+    VINCULADO = '2'
+    BRIGADISTA = '3'
     TIPO_ROL = (
-        (R_01, _('Responsable')),
-        (R_02, _('Vinculado')),
-        (R_03, _('Brigadista')),
+        (RESPONSABLE, _('Responsable')),
+        (VINCULADO, _('Vinculado')),
+        (BRIGADISTA, _('Brigadista')),
     )
     rol = models.CharField(max_length=4, choices=TIPO_ROL, blank=True)
     tipo_identificacion = models.CharField(max_length=2,
