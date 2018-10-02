@@ -12,6 +12,7 @@ from django_extensions.db.models import TimeStampedModel
 
 from meupet import services
 from users.models import OwnerProfile, Fundacion
+from adopcion.models import TipoRelacion, Relacion
 
      
 class PetQuerySet(models.QuerySet):
@@ -142,6 +143,11 @@ class Pet(TimeStampedModel):
     def change_status(self):
         self.status = self.status.next
         self.save()
+
+    def get_adoptante_actual(self):
+        tipor = TipoRelacion.objects.get(nombre='Adopción')
+        r = Relacion.objects.get(mascota=self , tipo_relacion = tipor)
+        return r.usuario.nombre_completo()
 
     def is_found_or_adopted(self):
         return self.status.final

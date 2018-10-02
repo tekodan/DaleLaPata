@@ -2,7 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
 from users.models import OwnerProfile
-from .models import Seguimiento
+from .models import Seguimiento, TipoRelacion
 class PostForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
@@ -35,13 +35,18 @@ class ContratoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(ContratoForm, self).__init__(*args, **kwargs)
 		self.helper = FormHelper()
-		self.fields['tipo'].required = True
+		
 		self.fields['estado'].required = True
 		self.fields['fecha'].required = True
 		self.fields['descripcion'].required = True
 		self.fields['observaciones'].required = True
 		#atreem
+		tipor = TipoRelacion.objects.get(nombre='Adopción')
+
 		self.fields['tipo'].widget.attrs.update({'class': 'form-control'})
+		self.fields['tipo'].widget.attrs['selected'] = 3
+		#self.fields['tipo'].widget.attrs['disabled'] = 'disabled'
+
 		self.fields['estado'].widget.attrs.update({'class': 'form-control'})
 		self.fields['fecha'].widget.attrs.update({'class': 'form-control'})
 		self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})

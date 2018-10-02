@@ -6,9 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from meupet.models import Pet
-from users.models import OwnerProfile
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 class Contratos(models.Model):  
     BASE = '1'
@@ -63,13 +62,18 @@ class TipoRelacion(models.Model):
         return self.nombre
 
 class Relacion(models.Model):
-    usuario = models.ForeignKey(OwnerProfile, models.DO_NOTHING, db_column='usuario')
-    mascota = models.ForeignKey(Pet, models.DO_NOTHING, db_column='mascota')
+    usuario = models.ForeignKey('users.OwnerProfile', models.DO_NOTHING, db_column='usuario')
+    mascota = models.ForeignKey('meupet.Pet', models.DO_NOTHING, db_column='mascota')
     fecha = models.DateTimeField()
     tipo_relacion = models.ForeignKey('TipoRelacion', models.DO_NOTHING, db_column='tipo_relacion')
  
     class Meta:
         unique_together = ('usuario', 'mascota')
+
+    def cambiar_adopcion(self):
+        tipor = TipoRelacion.objects.get(nombre='Adopción')
+        self.tipo_relacion = tipor
+        self.save()
 
     def __str__(self):
         return self.tipo_relacion.nombre+str(' - ')+self.usuario.first_name+str(' & ')+self.mascota.name
@@ -95,14 +99,14 @@ class Seguimiento(models.Model):
     ) 
     tipo = models.CharField(max_length=1, choices=TIPO)
     estado = models.CharField(max_length=1, choices=ESTADO)
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(default=timezone.now())
     descripcion = models.TextField(max_length=2000)
     observaciones = models.TextField(max_length=2000, blank=True, null=True)
     anterior = models.OneToOneField('self', blank=True, null=True, on_delete=models.PROTECT)
     relacion = models.ForeignKey('Relacion', models.DO_NOTHING)
 
     def __str__(self):
-        return self.fecha
+        return str(self.fecha)
 
 class Adjuntos_Seguimiento(models.Model):
     """

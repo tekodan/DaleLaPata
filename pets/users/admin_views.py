@@ -37,9 +37,10 @@ class PostulanteList(ListView):
     model = Relacion
 
     def get_queryset(self, *args, **kwargs):   
-        qs = Relacion.objects.all()     
+        qs = Relacion.objects.all()   
+        tipor = TipoRelacion.objects.get(nombre__contains = 'Postula')  
         if not self.request.user.is_superuser:
-            qs = Relacion.objects.filter(mascota__fundacion=self.request.user.fundacion)
+            qs = Relacion.objects.filter(mascota__fundacion=self.request.user.fundacion, tipo_relacion = tipor)
             return qs
         return qs
 
@@ -48,34 +49,26 @@ class PostulanteList(ListView):
         context['object'] = self.request.user
         return context
 ##############################################
-class AdopcionCreation(CreateView):
-    model = Relacion
-    #success_url = reverse_lazy('users:f_list')
-    fields = ['tipo_identificacion', 'num_identificacion', 'first_name', 'last_name', 'username','email', 'phone', 'facebook']
-##############################################
 def IniciarContrato(request, m, u):
     relacion=Relacion.objects.get(mascota=m, usuario=u)
     if request.method == "POST":
 
         form = ContratoForm(request.POST)    
         if form.is_valid():
-            seguimiento = form.save(commit=False)
-            
-
-            tipor = TipoRelacion.objects.get(nombre='Adopción')
-
-            
-            relacion.tipo_relacion = tipor
-
-            relacion.save(['tipo_relacion'])
-            return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
+            seguimiento = form.save(commit=False)                    
+            relacion.cambiar_adopcion()
+            relacion.mascota.change_status()
+            seguimiento.relacion = relacion
+            seguimiento.save()
+           
+            return render(request, 'adopcion/adopcion_done.html', {'relacion':relacion})
         else:
             return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
            
     else:
         form = ContratoForm()
         return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion})
-###########
+##############################################
 def GenerarContrato(request, r):
     if request.method == "POST":
         relacion=Relacion.objects.get(id=int(r))        
