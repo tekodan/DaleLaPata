@@ -87,11 +87,13 @@ class Seguimiento(models.Model):
         (VISITA, _('Visita')),
         (CONTRATO, _('Contrato')),
     ) 
-    APROBACIÓN = '1'
-    ANULACIÓN = '2'
-    PENDIENTE = '3'
-    ANOMALIAS = '4'
+    CELEBRACION = '1'
+    APROBACIÓN = '2'
+    ANULACIÓN = '3'
+    PENDIENTE = '4'
+    ANOMALIAS = '5'
     ESTADO = (
+        (CELEBRACION, _('Celebración')),
         (APROBACIÓN, _('Aprobación')),
         (ANULACIÓN, _('Anulación')),
         (PENDIENTE, _('Pendiente')),
@@ -109,23 +111,10 @@ class Seguimiento(models.Model):
         return str(self.fecha)
 
 class Adjuntos_Seguimiento(models.Model):
-    """
-    CHOICES = (
-        ('Evidencia', ((1, 'Aprobación'), (2, 'Anulación'), (3, 'Anomalias'))),
-        ('Visita', ((4, 'Aprobación'), (5, 'Anomalias'), (6, '6'))),
-        ('Contrato', ((4, 'Aprobación'), (5, 'Anulación'), (6, 'Pendiente'))),
-    )
-
-    # Just the letters: (('A', 'A'), ('B', 'B'))
-    LETTER_CHOICES = tuple((l[0], l[0]) for l in CHOICES)
-
-    letter = models.CharField(max_length=1, choices=LETTER_CHOICES)
-    number = models.PositiveIntegerField(max_length=1, choices=CHOICES)
-    """
     seguimiento = models.ForeignKey(Seguimiento, models.DO_NOTHING)
-    adjunto = models.ImageField(upload_to='relacion_seguimiento',
+    adjunto = models.ImageField(upload_to='adopcion_seguimiento',
                                         help_text=_('Maximo tamaño de imagen 8mb'))
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
