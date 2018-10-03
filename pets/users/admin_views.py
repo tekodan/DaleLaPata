@@ -13,6 +13,8 @@ from django.views.generic.edit import (
 
 from adopcion.models import *
 from adopcion.forms import ContratoForm
+from users.forms import UpdateUserForm
+
 from django.shortcuts import render
 
 from django.shortcuts import get_list_or_404, get_object_or_404
@@ -56,9 +58,13 @@ def IniciarContrato(request, m, u):
 
         form = ContratoForm(request.POST)    
         if form.is_valid():
-            seguimiento = form.save(commit=False)                    
+            #seguimiento = form.save(commit=False)  
+            seguimiento.descripcion = form.cleaned_data['descripcion']
+            seguimiento.observaciones = form.cleaned_data['observaciones']
+
             relacion.cambiar_adopcion()
-            relacion.mascota.change_status()
+            relacion.mascota.change_status()            
+
             seguimiento.relacion = relacion
             seguimiento.tipo = 3
             seguimiento.estado = 1

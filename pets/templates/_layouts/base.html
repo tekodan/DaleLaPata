@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{% static 'css/pets.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/lightbox.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <!-- Librerias Dropdown -->
+    <link rel="stylesheet" href="{% static 'css/jquery.dropdown.min.css' %}"/>
   {% endcompress %}
   {% block metatags %}{% endblock %}
   {% if not debug %}
@@ -207,6 +210,17 @@
   <script src="{% static 'js/lightbox.js' %}"></script>
   <script src="{% static 'js/matchMedia.js' %}"></script>
   <script src="{% static 'js/pets.js' %}"></script>
+
+  <!-- Js dropdown -->
+  <script src="{% static 'js/jquery.dropdown.min.js' %}"></script>
+  <script type="text/javascript">
+  $('.demo').dropdown({
+         limitCount: 5,
+      searchable: false
+      });
+  </script>
+  <!-- -->
+
   {% if not debug %}
     <div id="fb-root"></div>
     <script>(function (d, s, id) {
