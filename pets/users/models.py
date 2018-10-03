@@ -15,7 +15,9 @@ class Fundacion(models.Model):
     tipo_identificacion = models.CharField(max_length=3,
                                            choices=TIPO_ID)
     num_identificacion = models.CharField(unique=True,max_length=15)
-    razon_social = models.CharField(max_length=250, blank=True, null=True)
+    nombre_corto = models.CharField(max_length=100)
+    razon_social = models.TextField(max_length=1000)
+    descripcion = models.TextField(blank=True, null=True)
     fecha_fundacion = models.DateTimeField(blank=True, null=True)
     email = models.EmailField(unique=True, max_length=250)
     telefono = models.CharField(max_length=250, blank=True, null=True)
@@ -25,13 +27,9 @@ class Fundacion(models.Model):
                                validators=[])
     twitter = models.URLField(max_length=250, blank=True, null=True,
                                validators=[])
-    contrato_base = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
-        return self.razon_social
-
-    def __str__(self):
-        return str(self.num_identificacion)+str(' - ')+str(self.razon_social)
+        return self.nombre_corto
 
 class OwnerProfile(AbstractUser):
     CC = 'CC'
@@ -40,13 +38,13 @@ class OwnerProfile(AbstractUser):
         (CC, _('Cedula ciudadania')),
         (TI, _('Tarjeta identidad')),
     )
-    R_01 = '1'
-    R_02 = '2'
-    R_03 = '3'
+    RESPONSABLE = '1'
+    VINCULADO = '2'
+    BRIGADISTA = '3'
     TIPO_ROL = (
-        (R_01, _('Responsable')),
-        (R_02, _('Vinculado')),
-        (R_03, _('Brigadista')),
+        (RESPONSABLE, _('Responsable')),
+        (VINCULADO, _('Vinculado')),
+        (BRIGADISTA, _('Brigadista')),
     )
     rol = models.CharField(max_length=4, choices=TIPO_ROL, blank=True)
     tipo_identificacion = models.CharField(max_length=2,

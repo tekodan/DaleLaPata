@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{% static 'css/pets.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/lightbox.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+    <!-- Librerias Dropdown -->
+    <link rel="stylesheet" href="{% static 'css/jquery.dropdown.min.css' %}"/>
   {% endcompress %}
   {% block metatags %}{% endblock %}
   {% if not debug %}
@@ -45,12 +48,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="{% url 'common:homepage' %}">
+      <a href="{% url 'users:f_list' %}">
         <img src="{% static 'img/icono.png' %}" width="150px" height="60px" style="position:relative; top:20px;"> 
         
         {% if user.fundacion %}
         <div style="position:relative; top:17px; background-color: white; border-color: black; text-align: center;">
-          <p width="150px" height="60px" style="color: black;">{{ user.fundacion.razon_social }}</p>   
+          <p width="150px" height="60px" style="color: black;">{{ user.fundacion.nombre_corto }}</p>   
         </div>
         {% endif %}
           
@@ -207,6 +210,17 @@
   <script src="{% static 'js/lightbox.js' %}"></script>
   <script src="{% static 'js/matchMedia.js' %}"></script>
   <script src="{% static 'js/pets.js' %}"></script>
+
+  <!-- Js dropdown -->
+  <script src="{% static 'js/jquery.dropdown.min.js' %}"></script>
+  <script type="text/javascript">
+  $('.demo').dropdown({
+         limitCount: 5,
+      searchable: false
+      });
+  </script>
+  <!-- -->
+
   {% if not debug %}
     <div id="fb-root"></div>
     <script>(function (d, s, id) {

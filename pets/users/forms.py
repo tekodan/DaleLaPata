@@ -36,13 +36,14 @@ class FundacionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FundacionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['nombre_corto'].widget.attrs.update({'class': 'form-control'})
         self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
         self.fields['telefono'].widget.attrs.update({'class': 'form-control'})
         self.fields['logo'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update({'class': 'form-control'})
         self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
-        self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
+        #self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
 
 def _build_choice_field(label, choices=None, required=False):
     empty_choice = (('', '------------'),)
@@ -111,6 +112,7 @@ class RegisterFormFund(forms.ModelForm):
         super(RegisterFormFund, self).__init__(*args, **kwargs)
         self.fields['tipo_identificacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['num_identificacion'].widget.attrs.update({'class': 'form-control'})
+        self.fields['nombre_corto'].widget.attrs.update({'class': 'form-control'})
         self.fields['razon_social'].widget.attrs.update({'class': 'form-control'})
         self.fields['fecha_fundacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
@@ -118,19 +120,19 @@ class RegisterFormFund(forms.ModelForm):
         self.fields['logo'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update({'class': 'form-control'})
         self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
-        self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
+        #self.fields['contrato_base'].widget.attrs.update({'class': 'form-control'})
         self.fields['facebook'].widget.attrs.update(
             {'placeholder': _('Ingrese la direccion completa de su usuario en Facebook')})
 
     class Meta:
         model = Fundacion
-        fields = ('tipo_identificacion', 'num_identificacion', 'razon_social', 'fecha_fundacion',
-                  'email', 'telefono', 'logo', 'facebook','twitter','contrato_base',)
+        fields = ('tipo_identificacion', 'num_identificacion', 'nombre_corto', 'razon_social', 'fecha_fundacion',
+                  'email', 'telefono', 'logo', 'facebook','twitter',)
 
 class UpdateFundacionForm(FundacionForm):
     class Meta:
         model = Fundacion
-        fields = ('razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter', 'contrato_base',)
+        fields = ('nombre_corto','razon_social', 'email', 'telefono', 'logo', 'facebook', 'twitter',)
 
     def __init__(self, *args, **kwargs):
         super(UpdateFundacionForm, self).__init__(*args, **kwargs)

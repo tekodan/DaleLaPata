@@ -20,6 +20,9 @@
             <th>Chip Mascota</th>
             <th>Mascota</th>
             <th>Fecha</th>
+            {% if object.is_superuser %}
+            <th>Fundacion</th>
+            {% endif %}
             <th>Acciones</th>
           </tr>
         </thead>
@@ -31,7 +34,10 @@
             <td>{{ relacion.chip_id }}</td>
             <td><a href="{{ relacion.mascota.get_absolute_url }}"> {{ relacion.mascota }} </a></td>
             <td>{{ relacion.fecha }}</td>
-            <td><a href="">Ver</a> | <a href="">Contrato Adopción</a></td>
+            {% if object.is_superuser %}
+             <td>{{ relacion.mascota.fundacion.nombre_corto }}</td>
+            {% endif %}
+            <td><a href="{% url "users:c_new" relacion.mascota.id relacion.usuario.id  %}">Realizar contrato</a></td>
           </tr>
           {% endfor %}
         </tbody>

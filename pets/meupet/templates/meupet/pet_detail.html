@@ -109,9 +109,16 @@
             </p>
           {% endif %}
 
+          {% if pet.is_found_or_adopted %}
+            <p>
+                <strong>{% trans 'Adoptada por' %}:</strong><br/>
+                {{ pet.get_adoptante_actual }}
+            </p>
+          {% endif %}
+
           <p>
             <strong>{% trans 'Contacto' %}:</strong><br/>
-            <a href="{% url 'users:user_profile' pet.owner.id %}">{{pet.owner.fundacion.razon_social}} - {{ pet.owner.get_full_name }}</a>
+            <a href="{% url 'users:user_profile' pet.owner.id %}">{{pet.owner.fundacion.nombre_corto}} - {{ pet.owner.get_full_name }}</a>
             {% if pet.owner.facebook %} | <a href="{{ pet.owner.facebook }}">Facebook</a>{% endif %}
           </p>
 
@@ -132,7 +139,7 @@
                   {% csrf_token %}
                   <input name="pet_id" id="pet_id" value="{{ pet.id }}" type="hidden">
                   <input type="submit" class="btn btn-success" value="
-                            {% if pet.status.code == 'Mascota para adopción' %}
+                            {% if pet.status.code == 'Adopción' %}
                               {% trans 'Postularse' %}
                             {% else %} 
                               {% if pet.status.code == 'Extraviada' %}

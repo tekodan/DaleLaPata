@@ -10,17 +10,20 @@
 
 {% endblock %}
 {% block content %}
-    <button><a href="{% url "users:f_new"%}">Agregar usuario</a></button>
-    <div class="table-responsive">          
+    <div class="table-responsive">    
+    <button><a href="{% url "users:f_new"%}">Agregar usuario</a></button>      
       <table id="myTable" class="table">
         <thead>
           <tr class="clickable-row">
             <th>Tipo Id</th>
             <th>Numero Id</th>
-            <th>Razon social</th>
+            <th>Nombres</th>
             <th>Email</th>
             <th>Facebook</th>
-            <th>Twitter</th>
+            <th>Rol</th>
+            {% if object.is_superuser %}
+            <th>Fundacion</th>
+            {% endif %}
             <th>Acciones</th>
           </tr>
         </thead>
@@ -29,14 +32,21 @@
           <tr>
             <td>{{ ownerprofile.tipo_identificacion }}</td>
             <td>{{ ownerprofile.num_identificacion }}</td>
-            <td>{{ ownerprofile.first_name }}</td>
-            <td>{{ ownerprofile.last_name }}</td>
+            <td>{{ ownerprofile.nombre_completo }}</td>
+            <td>{{ ownerprofile.email }}</td>
             <td>{{ ownerprofile.facebook }}</td>
-            <td>{{ ownerprofile.rol.nombre }}</td>
+            <td>{{ ownerprofile.get_rol }}</td>
+            {% if object.is_superuser %}
+             <td>{{ ownerprofile.fundacion.nombre_corto }}</td>
+            {% endif %}
             <td><a href="{% url "users:f_detail" ownerprofile.id %}">Ver</a>| 
                 <a href="{% url "users:f_edit" ownerprofile.id %}">Editar</a>|
                 <a href="{% url "users:f_delete" ownerprofile.id %}">Borrar</a></td>
           </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7" class="text-center bg-warning">No existen datos</td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>

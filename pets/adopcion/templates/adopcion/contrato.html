@@ -1,0 +1,208 @@
+{% extends 'adminlte/base.html' %}
+{% load i18n static %}
+{% load i18n static thumbnail %}
+{% load i18n crispy_forms_tags static %}
+
+{% block content %}
+
+
+
+    <div class="modal fade" id="delete_pet" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">{% trans 'Ver contrato' %}</h4>
+                </div>
+
+                <div class="modal-body">
+                    <table style="height: 42px; width: 705px;">
+                        <tbody>
+                            <tr style="height: 77px;">
+                                <td style="width: 118px; height: 77px;">Fecha:</td>
+                                <td style="width: 470px; height: 77px; text-align: center;">CONTRATO LEGAL DE ADOPCION DE UN ANIMAL DE COMPA&Ntilde;IA
+                                <br>{{relacion.mascota.fundacion.nombre_corto}}</td>
+                                <td style="width: 99px; height: 77px; text-align: center;">LOGO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="height: 73px;" width="704">
+                        <tbody>
+                            <tr>
+                                <td style="width: 169px;">&nbsp; {{relacion.mascota.name}}</td>
+                                <td style="width: 169px;">&nbsp; {{relacion.usuario.nombre_completo}}</td>
+                                <td style="width: 169px;">&nbsp;</td>
+                                <td style="width: 169px;">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Cancelar' %}</button>
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="container col-sm-12 col-md-12">
+     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#delete_pet" data-modal-mobile-viewport-width="s">
+                {% trans 'Ver contrato' %}
+     </button>
+     <br><br>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-folder-close"></span>
+                            Datos Postulante
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Nombres&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.first_name}}'>
+                                    </td>
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Apellidos&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.last_name}}'>
+                                    </td>
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Documento&nbsp;</label><input style="width: 40px;" type="text" readonly name="" value='{{relacion.usuario.tipo_identificacion}}' >
+                                    </td>
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Numero&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.num_identificacion}}'>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Email&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.email}}'>
+                                    </td>  
+                                </tr>
+                                <!-- ------------------------------------------ -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-th"></span>
+                            Datos Referencias
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Adjuntar Contrato
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            
+                            <form class="form-horizontal" method="POST" enctype="multipart/form-data"
+                            action="{% url 'adopcion:upload_image' relacion.id %}">
+                            {% csrf_token %}
+                            <input name="pet_id" value="{{ pet.id }}" type="hidden">
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                <!--<label for="another_picture" class="control-label">{% trans 'Agregar foto' %}</label>-->
+                                <input type="file" id="another_picture" name="another_picture">
+                                </div>
+
+                                <div class="col-md-6">
+                                <input type="submit" name="submit" class="btn btn-primary" value="{% trans 'Subir Imagen' %}">
+                                </div>
+                            </div>
+                            </form>
+                           
+                            {% if seguimiento.adjuntos_seguimiento_set.all %}
+                              <div class="col-md-12">
+                                <h3>{% trans 'Adjuntos Contrato!' %}</h3>
+
+                                <div class="row">
+                                  {% for adjuntos_seguimiento in seguimiento.adjuntos_seguimiento_set.all %}
+                                    <div class="col-md-3">
+                                      <a href="{{ adjuntos_seguimiento.adjunto.url }}" data-lightbox="{{ relacion }}" data-title="{{ relacion.mascota }}">
+                                        <img class="img-thumbnail" src="{{ adjuntos_seguimiento.adjunto|thumbnail_url:'seguimiento_thumb' }}"
+                                             alt="{{ relacion }}"/>
+                                      </a>
+                                    </div>
+                                    {% if forloop.counter|divisibleby:4 %}
+                                      </div>
+                                      <div class="row">
+                                    {% endif %}
+                                  {% endfor %}
+                                  </div>
+                              </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-file"></span>
+                            Completar contrato
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <form method="POST" class="post-form">{% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="save btn btn-success">Completar proceso adopción</button>
+                                <br>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

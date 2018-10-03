@@ -25,7 +25,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 DJANGO_APPS = (
     'django_adminlte',
-    'django_adminlte_theme',
+    #'django_adminlte_theme',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -210,6 +210,7 @@ THUMBNAIL_ALIASES = {
     '': {
         'pet_thumb': {'size': (350, 350), 'crop': True, 'upscale': True},
         'pet_poster': {'size': (550, 550), 'crop': True, 'upscale': True},
+        'seguimiento_thumb': {'size': (350, 350), 'crop': True, 'upscale': True},
     }
 }
 

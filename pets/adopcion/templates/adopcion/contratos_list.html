@@ -1,0 +1,36 @@
+{% extends 'adminlte/base.html' %}
+
+{% block logo %}
+    <div class="login-logo">
+    <a href="{% block logo_href %}/{% endblock %}">
+        {% block logo_text %}<b>Dale</b>La Pata{% endblock %}</a>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
+{% block content %}
+    <div class="table-responsive">          
+      <table id="myTable" class="table">
+        <thead>
+          <tr class="clickable-row">
+            <th>id</th>
+            <th>nombre</th>
+            <th>descripcion</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contratos_fundacion in object_list %}
+          <tr>
+            <td>{{ contratos_fundacion.id}} </td>
+            <td>{{ contratos_fundacion.descripcion_base }}</td>
+            <td>{{ contratos_fundacion.fecha }}</td>
+            <td><a href="">Ver</a> | <a href="">Contrato Adopción</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}
+
