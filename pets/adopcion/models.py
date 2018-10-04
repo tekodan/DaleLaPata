@@ -75,6 +75,9 @@ class Relacion(models.Model):
         self.tipo_relacion = tipor
         self.save()
 
+    def get_fecha_actual(self):
+        return str(timezone.now())
+
     def __str__(self):
         return self.tipo_relacion.nombre+str(' - ')+self.usuario.first_name+str(' & ')+self.mascota.name
 

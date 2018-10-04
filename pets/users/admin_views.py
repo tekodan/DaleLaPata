@@ -75,13 +75,13 @@ def IniciarContrato(request, m, u):
            
             return render(request, 'adopcion/adopcion_done.html', {'relacion':relacion , 'seguimiento':seguimiento})
         else:
-            return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion , 'seguimiento':seguimiento})
+            return render(request, 'adopcion/contrato.html', {'request':request, 'form': form , 'relacion':relacion , 'seguimiento':seguimiento})
            
     else:
         #form = ContratoForm()
         #form.fields['descripcion'].widget.attrs.update({'value': 'hola hola'})
         form = ContratoForm()
-        return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion, 'seguimiento':seguimiento})
+        return render(request, 'adopcion/contrato.html', {'request':request, 'form': form , 'relacion':relacion, 'seguimiento':seguimiento})
 ##############################################
 def GenerarContrato(request, r):
     if request.method == "POST":

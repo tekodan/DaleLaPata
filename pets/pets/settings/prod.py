@@ -211,6 +211,8 @@ THUMBNAIL_ALIASES = {
         'pet_thumb': {'size': (350, 350), 'crop': True, 'upscale': True},
         'pet_poster': {'size': (550, 550), 'crop': True, 'upscale': True},
         'seguimiento_thumb': {'size': (350, 350), 'crop': True, 'upscale': True},
+        'fundacion_thumb': {'size': (350, 350), 'crop': True, 'upscale': True},
+        'u_firma_thumb': {'size': (200, 200), 'crop': False, 'upscale': True},
     }
 }
 
