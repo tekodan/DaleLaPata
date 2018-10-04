@@ -5,7 +5,144 @@
 
 {% block content %}
 
+<style type="text/css">
+    .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
+#modal-c a {
+  color: #5D6975;
+  text-decoration: underline;
+}
+
+#modal-c body {
+  position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  font-family: Arial;
+}
+
+#modal-c header {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+#modal-c h1 {
+  border-top: 1px solid  #5D6975;
+  border-bottom: 1px solid  #5D6975;
+  color: #5D6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 20px 0;
+  background: url(dimension.png);
+}
+
+#project {
+  float: left;
+}
+
+#project span {
+  color: #5D6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;        
+}
+
+#modal-c table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+#modal-c table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+#modal-c table th,
+#modal-c table td {
+  text-align: center;
+}
+
+#modal-c table th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+#modal-c table .service,
+#modal-c table .desc {
+  text-align: left;
+}
+
+#modal-c table td {
+  padding: 20px;
+  text-align: right;
+}
+
+#modal-c table td.service,
+#modal-c table td.desc {
+  vertical-align: top;
+}
+
+#modal-c table td.unit,
+#modal-c table td.qty,
+#modal-c table td.total {
+  font-size: 1.2em;
+}
+
+#modal-c table td.grand {
+  border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+  color: #5D6975;
+  font-size: 1.2em;
+}
+
+#modal-c footer {
+  color: #5D6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #C1CED9;
+  padding: 8px 0;
+  text-align: center;
+}
+</style>
 
     <div class="modal fade" id="delete_pet" tabindex="-1">
         <div class="modal-dialog">
@@ -18,27 +155,92 @@
                     <h4 class="modal-title">{% trans 'Ver contrato' %}</h4>
                 </div>
 
-                <div class="modal-body">
-                    <table style="height: 42px; width: 705px;">
-                        <tbody>
-                            <tr style="height: 77px;">
-                                <td style="width: 118px; height: 77px;">Fecha:</td>
-                                <td style="width: 470px; height: 77px; text-align: center;">CONTRATO LEGAL DE ADOPCION DE UN ANIMAL DE COMPA&Ntilde;IA
-                                <br>{{relacion.mascota.fundacion.nombre_corto}}</td>
-                                <td style="width: 99px; height: 77px; text-align: center;">LOGO</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="height: 73px;" width="704">
-                        <tbody>
-                            <tr>
-                                <td style="width: 169px;">&nbsp; {{relacion.mascota.name}}</td>
-                                <td style="width: 169px;">&nbsp; {{relacion.usuario.nombre_completo}}</td>
-                                <td style="width: 169px;">&nbsp;</td>
-                                <td style="width: 169px;">&nbsp;</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="modal-body" id="modal-c">
+                    <!--  ----------------------------------------------------------------------- -->
+                    <header class="clearfix">
+      <div id="logo">
+        <img src="logo.png">
+      </div>
+      <h1>CONTRATO LEGAL PARA ANIMAL DE COMPAÑIA FUNDACION {{ relacion.usuario.fundacion.nombre_corto }}</h1>
+      <div id="company" class="clearfix">
+        <div>Company Name</div>
+        <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+        <div>(602) 519-0450</div>
+        <div><a href="mailto:company@example.com">company@example.com</a></div>
+      </div>
+      <div id="project">
+        <div><span>PROJECT</span> Website development</div>
+        <div><span>CLIENT</span> John Doe</div>
+        <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
+        <div><span>EMAIL</span> <a href="mailto:john@example.com">john@example.com</a></div>
+        <div><span>DATE</span> August 17, 2015</div>
+        <div><span>DUE DATE</span> September 17, 2015</div>
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">SERVICE</th>
+            <th class="desc">DESCRIPTION</th>
+            <th>PRICE</th>
+            <th>QTY</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="service">Design</td>
+            <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
+            <td class="unit">$40.00</td>
+            <td class="qty">26</td>
+            <td class="total">$1,040.00</td>
+          </tr>
+          <tr>
+            <td class="service">Development</td>
+            <td class="desc">Developing a Content Management System-based Website</td>
+            <td class="unit">$40.00</td>
+            <td class="qty">80</td>
+            <td class="total">$3,200.00</td>
+          </tr>
+          <tr>
+            <td class="service">SEO</td>
+            <td class="desc">Optimize the site for search engines (SEO)</td>
+            <td class="unit">$40.00</td>
+            <td class="qty">20</td>
+            <td class="total">$800.00</td>
+          </tr>
+          <tr>
+            <td class="service">Training</td>
+            <td class="desc">Initial training sessions for staff responsible for uploading web content</td>
+            <td class="unit">$40.00</td>
+            <td class="qty">4</td>
+            <td class="total">$160.00</td>
+          </tr>
+          <tr>
+            <td colspan="4">SUBTOTAL</td>
+            <td class="total">$5,200.00</td>
+          </tr>
+          <tr>
+            <td colspan="4">TAX 25%</td>
+            <td class="total">$1,300.00</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="grand total">GRAND TOTAL</td>
+            <td class="grand total">$6,500.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div id="notices">
+        <div>NOTICE:</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+      </div>
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+
+                    <!-- ----------------------------------------------------------------------- -->
                 </div>
 
                 <div class="modal-footer">
@@ -56,7 +258,11 @@
                 {% trans 'Ver contrato' %}
      </button>
      <br><br>
-
+    <style type="text/css">
+         td input {
+                width: 150px;
+            }
+    </style>
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="panel-group" id="accordion">
@@ -69,6 +275,7 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
+                            <div class="table-responsive">
                             <table class="table">
                                 <tr>
                                     <td>
@@ -87,11 +294,18 @@
 
                                 <tr>
                                     <td>
-                                       <label class="text-primary" style="border-style: solid">&nbsp;Email&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.email}}'>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Email&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.email}}'>  
+                                    </td>  
+                                     <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Telefono&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.phone}}'> 
+                                    </td>  
+                                    <td>
+                                       <label class="text-primary" style="border-style: solid">&nbsp;Facebook Url&nbsp;</label><input type="text" readonly name="" value='{{relacion.usuario.facebook}}'> 
                                     </td>  
                                 </tr>
                                 <!-- ------------------------------------------ -->
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,28 +318,28 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="http://www.jquery2dotnet.com">Tex</a>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="table-responsive">
+                           <table border="1" class="table">
+                            <tr>
+                               <th colspan="2" style="text-align: center;">Referencia #1</th>
+                               <th colspan="2" style="text-align: center;">Referencia #2</th>
+                           </tr>
+                           <tr>
+                               <td>Nombres</td>
+                               <td>Bill Gates</td>
+
+                               <td>Nombres</td>
+                               <td>555 77 855</td>
+                           </tr>
+                           <tr>
+                               <td>Nombres</td>
+                               <td>Bill Gates</td>
+
+                               <td>Nombres</td>
+                               <td>555 77 855</td>
+                           </tr>
+                       </table>
+                        </div>
                         </div>
                     </div>
                 </div>

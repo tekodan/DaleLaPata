@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth.views import LogoutView
 
+from django.contrib.auth.decorators import login_required
+
 from . import views, admin_views
 
 from users.admin import AdminFundacion
@@ -43,18 +45,18 @@ urlpatterns = [
     url(r'^recover/(?P<signature>.+)/$', views.RecoverDoneView.as_view(), name='recover_password_sent'),
 
     #Urls para el crud
-    url(r'^administrador/$', OwnerProfileList.as_view(), name='f_list'),
+    url(r'^administrador/$', login_required(OwnerProfileList.as_view()), name='f_list'),
     
-    url(r'^(?P<pk>\d+)$', OwnerProfileDetail.as_view(), name='f_detail'),
-    url(r'^nuevo$', OwnerProfileCreation.as_view(), name='f_new'),
-    url(r'^editar/(?P<pk>\d+)$', OwnerProfileUpdate.as_view(), name='f_edit'),
-    url(r'^borrar/(?P<pk>\d+)$', OwnerProfileDelete.as_view(), name='f_delete'),
+    url(r'^administrador/(?P<pk>\d+)$', login_required(OwnerProfileDetail.as_view()), name='f_detail'),
+    url(r'^administrador/nuevo$', login_required(OwnerProfileCreation.as_view()), name='f_new'),
+    url(r'^administrador/editar/(?P<pk>\d+)$', login_required(OwnerProfileUpdate.as_view()), name='f_edit'),
+    url(r'^administrador/borrar/(?P<pk>\d+)$', login_required(OwnerProfileDelete.as_view()), name='f_delete'),
 
-    url(r'^administrador/postulantes$', PostulanteList.as_view(), name='r_list'),
+    url(r'^administrador/postulantes$', login_required(PostulanteList.as_view()), name='r_list'),
 
-    url(r'^contratos/list$', ContratoList.as_view(), name='c_list'),
+    url(r'^administrador/contratos/list$', login_required(ContratoList.as_view()), name='c_list'),
 
-    url(r'^contratos/(?P<m>(\d+))/(?P<u>(\d+))/$', IniciarContrato, name='c_new'),
-    url(r'^contratos/generar/(?P<r>(\d+))/$', GenerarContrato, name='c_generar'),
+    url(r'^administrador/contratos/(?P<m>(\d+))/(?P<u>(\d+))/$', login_required(IniciarContrato), name='c_new'),
+    url(r'^administrador/contratos/generar/(?P<r>(\d+))/$', login_required(GenerarContrato), name='c_generar'),
     #url(r'^contrato/(?P<pk>\d+)$', ContratoCreation.as_view(), name='c_new'),
 ]
