@@ -78,10 +78,10 @@ class RegisterForm(UserForm):
         self.fields['fundacion'].widget.attrs.update({'class': 'form-control'})
 
         #self.fields['rol'] = _build_choice_field(_('Rol'), required=True)
-        self.fields['rol']: forms.Select(attrs={'class': 'form-control'})
+        #self.fields['rol']: forms.Select(attrs={'class': 'form-control'})
         self.fields['rol'].widget.attrs.update({'class': 'form-control'})
 
-        self.fields['tipo_identificacion']: forms.Select(attrs={'class': 'form-control'})
+        #self.fields['tipo_identificacion']: forms.Select(attrs={'class': 'form-control'})
         self.fields['tipo_identificacion'].widget.attrs.update({'class': 'form-control'})
         self.fields['num_identificacion'].widget.attrs.update({'class': 'form-control'})
 
