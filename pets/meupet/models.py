@@ -113,7 +113,9 @@ class Pet(TimeStampedModel):
         (MEDIUM, _('Mediano')),
         (LARGE, _('Grande')),
     )
+
     chip_id = models.IntegerField(unique=True, null=True, blank=True)
+    edad = models.CharField(max_length=100, null=True, blank=True)
     owner = models.ForeignKey(OwnerProfile, on_delete=models.PROTECT)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)

@@ -28,7 +28,7 @@ class PetForm(forms.ModelForm):
     class Meta:
         model = models.Pet
         fields = ('name', 'description', 'city', 'kind',
-                  'profile_picture', 'size', 'sex', 'status','chip_id',)
+                  'profile_picture', 'size', 'sex', 'status','chip_id', 'edad',)
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Nombre de la mascota')}),
             'chip_id': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('# chip en caso de tenerlo')}),

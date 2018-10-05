@@ -3,7 +3,7 @@
 <form class="form-horizontal col-md-6" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
 
-  <div class="form-group{% if form.status.errors %} has-error{% endif %}">
+  <div class="form-group{% if form.chip_id.errors %} has-error{% endif %}">
     <label for="{{ form.chip_id.id_for_label }}" class="col-sm-2 control-label">{% trans 'Chip' %}</label>
 
     <div class="col-sm-10">
@@ -18,6 +18,15 @@
     <div class="col-sm-10">
       {{ form.status }}
       {{ form.status.errors }}
+    </div>
+  </div>
+
+  <div class="form-group{% if form.edad.errors %} has-error{% endif %}">
+    <label for="{{ form.edad.id_for_label }}" class="col-sm-2 control-label">{% trans 'Edad' %}</label>
+
+    <div class="col-sm-10">
+      {{ form.edad }}
+      {{ form.edad.errors }}
     </div>
   </div>
 
