@@ -46,7 +46,7 @@ def post_new(request, pk):
             #return redirect('post_detail', pk=post.pk)
             log.info("ENTRO")
             #context['fundacion'] = self.request.user.fundacion
-            return render(request, 'adopcion/done.html', {'pet_nombre': pet.name, 'pet_slug': pet.slug, 'user_name': str(ownerprofile.first_name)+str(' ')+str(ownerprofile.last_name),'form': form})
+            return render(request, 'adopcion/done.html', {'pet': pet , 'user_name': str(ownerprofile.first_name)+str(' ')+str(ownerprofile.last_name),'form': form})
         else:
             return render(request, 'adopcion/home.html', {'form': form})
            

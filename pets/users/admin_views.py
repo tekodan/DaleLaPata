@@ -54,12 +54,15 @@ class PostulanteList(ListView):
 def IniciarContrato(request, m, u):
     relacion=Relacion.objects.get(mascota=m, usuario=u)
     seguimiento=Seguimiento.objects.get(relacion=relacion)
+    
+    #form.fields['descripcion'] = "hola hola"
     if request.method == "POST":
 
         form = ContratoForm(request.POST)    
+        
         if form.is_valid():
             #seguimiento = form.save(commit=False)  
-            seguimiento.descripcion = form.cleaned_data['descripcion']
+            #seguimiento.descripcion = form.cleaned_data['descripcion']
             seguimiento.observaciones = form.cleaned_data['observaciones']
 
             relacion.cambiar_adopcion()
@@ -72,11 +75,13 @@ def IniciarContrato(request, m, u):
            
             return render(request, 'adopcion/adopcion_done.html', {'relacion':relacion , 'seguimiento':seguimiento})
         else:
-            return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion , 'seguimiento':seguimiento})
+            return render(request, 'adopcion/contrato.html', {'request':request, 'form': form , 'relacion':relacion , 'seguimiento':seguimiento})
            
     else:
+        #form = ContratoForm()
+        #form.fields['descripcion'].widget.attrs.update({'value': 'hola hola'})
         form = ContratoForm()
-        return render(request, 'adopcion/contrato.html', {'form': form , 'relacion':relacion, 'seguimiento':seguimiento})
+        return render(request, 'adopcion/contrato.html', {'request':request, 'form': form , 'relacion':relacion, 'seguimiento':seguimiento})
 ##############################################
 def GenerarContrato(request, r):
     if request.method == "POST":

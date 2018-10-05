@@ -7,18 +7,25 @@
   <div class="row">
     <div class="col-md-9">
 
-      <h2>{{ user_name }} estás a un paso de chocar la pata con {{ pet_nombre }}!</h2>
+      <h2>{{ user_name }} estás a un paso de chocar la pata con {{ pet.name }}!</h2>
 
-       <p>El registro de tu postulación fue enviado a la fundacion {}, los cuales te contactaran para completar el
+       <p>El registro de tu postulación fue enviado a la fundacion {{ pet.fundacion.nombre_corto }}, los cuales te contactaran para completar el
        proceso de adopcíon, puedes contactarte con ellos para agilizar el proceso</p>
 
       <h3>Datos fundación</h3>
-      <p>.....</p>
+      <a href="{{ pet.fundacion.logo.url }}" data-lightbox="{{ pet.fundacion.nombre_corto }}" data-title="{{ pet.fundacion }}">
+      <img class="img-thumbnail" src="{{ pet.fundacion.logo|thumbnail_url:'fundacion_thumb' }}"
+             alt="{{ pet.fundacion }}"/>
+      </a>
+      <p>{{ pet.fundacion.tipo_identificacion }} - {{ pet.fundacion.num_identificacion }}</p>
+      <p>Nombre: {{ pet.fundacion.nombre_corto }}</p>
+      <p>email: {{ pet.fundacion.email }}</p>
+      <p>telefono: {{ pet.fundacion.telefono }}</p>
 
       <p>Esta informacion sera compartida automaticamente en <a href="https://www.facebook.com/fbfundacion">Facebook</a>
         y tambien en <a href="https://twitter.com/twfundacion">Twitter</a> de la fundación [] ! :)</p>
 
-      <p>Para ver los detalles de este gran amigo <a href="{% url 'meupet:detail' pet_slug %}">aqui</a>.</p>
+      <p>Para ver los detalles de este gran amigo <a href="{% url 'meupet:detail' pet.slug %}">aqui</a>.</p>
 
       <p>
         Sigue descrubriendo nuevos amigos en  <a href="{% url 'meupet:index'  %}">aqui</a>.</p>.</p>

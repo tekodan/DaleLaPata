@@ -3,4 +3,13 @@
 {% block title %}Detalles{% endblock %}
 {% block content %}
 	{{ownerprofile.last_name}}
+	<div class="table-responsive">
+		<table class="table">
+			<tr>
+				<td>Identificacion: {{ownerprofile.tipo_identificacion}} - {{ownerprofile.num_identificacion}} </td>
+				<th>Nombres: {{ownerprofile.nombre_completo}}</th>
+			</tr>
+		</table>
+		<a class="btn btn-info" href="{% url 'users:f_list' %}">Regresar</a>
+	</div>
 {% endblock %}

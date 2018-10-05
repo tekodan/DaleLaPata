@@ -38,7 +38,7 @@ class ContratoForm(forms.ModelForm):
 		
 		#self.fields['estado'].required = True
 		self.fields['fecha'].required = True
-		self.fields['descripcion'].required = True
+		#self.fields['descripcion'].required = True
 		self.fields['observaciones'].required = True
 		#atreem
 
@@ -48,12 +48,12 @@ class ContratoForm(forms.ModelForm):
 
 		#self.fields['estado'].widget.attrs.update({'class': 'form-control'})
 		self.fields['fecha'].widget.attrs.update({'class': 'form-control'})
-		self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})
+		#self.fields['descripcion'].widget.attrs.update({'class': 'form-control'})
 		self.fields['observaciones'].widget.attrs.update({'class': 'form-control'})
 
 	class Meta:
 		model = Seguimiento
-		fields = ('fecha', 'descripcion','observaciones')
+		fields = ('fecha','observaciones')
 		#fields = ('first_name', 'last_name', 'email',)
 		#fields['first_name'].widget.attrs.update({'class': 'form-control'})
         #self.fields['last_name'].widget.attrs.update({'class': 'form-control'})

@@ -4,6 +4,7 @@ from users.validators import validate_facebook_url
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
 
 class Fundacion(models.Model):
     RUT = 'RUT'
@@ -18,9 +19,10 @@ class Fundacion(models.Model):
     nombre_corto = models.CharField(max_length=100)
     razon_social = models.TextField(max_length=1000)
     descripcion = models.TextField(blank=True, null=True)
-    fecha_fundacion = models.DateTimeField(blank=True, null=True)
+    fecha_fundacion = models.DateTimeField(blank=True, null=True, default=timezone.now())
     email = models.EmailField(unique=True, max_length=250)
     telefono = models.CharField(max_length=250, blank=True, null=True)
+    direccion = models.CharField(max_length=250, blank=True, null=True)
     logo = models.ImageField(upload_to='fundacion_profiles',
                                         help_text=_('Maximo tamaño de imagen 8mb'), blank=True, null=True)
     facebook = models.URLField(max_length=250, blank=True, null=True,
@@ -55,6 +57,11 @@ class OwnerProfile(AbstractUser):
     facebook = models.URLField(max_length=250, blank=True, null=True,
                                validators=[validate_facebook_url])
     phone = models.CharField('Telefono de contacto',  max_length=30, blank=True)
+    direccion = models.CharField(max_length=250, blank=True, null=True)
+    firma = models.ImageField(upload_to='users_firmas',
+                                        help_text=_('Maximo tamaño de imagen 8mb'), blank=True, null=True)
+    foto = models.ImageField(upload_to='users_profiles',
+                                        help_text=_('Maximo tamaño de imagen 8mb'), blank=True, null=True)
     fundacion = models.ForeignKey(Fundacion, models.DO_NOTHING, db_column='fundacion', blank=True, null=True)
 
     def get_absolute_url(self):
