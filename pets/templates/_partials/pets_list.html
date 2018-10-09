@@ -1,11 +1,19 @@
 {% load i18n thumbnail %}
 
-<div class="row">
-  {% if pets %}
+<div class="row row2">
+
     {% for pet in pets %}
-      <div class="col-xs-12 col-sm-6 col-md-4 card-pet">
-        {% include '_partials/pet_card.html' with pet=pet show_badge=True only %}
-      </div>
+      {% if status == pet.status.code %}
+        <div class="col-xs-12 col-sm-6  card-pet">
+      {% include '_partials/pet_card.html' with status=status pet=pet show_badge=True only  %}
+       </div>
+      {% endif %}
+      {% if status %}
+      {% else%}
+        <div class="col-xs-12 col-sm-3 card-pet" >
+          {% include '_partials/pet_card.html' with  pet=pet show_badge=True only  %}
+        </div>
+      {% endif %}
     {% endfor %}
 
     {% if pets.paginator.num_pages > 1 %}
@@ -33,9 +41,5 @@
         </nav>
       </div>
     {% endif %}
-  {% else %}
-    <div class="col-md-12">
-      <h4>{% trans 'No existen amigos en esta categoria :)' %}</h4>
-    </div>
-  {% endif %}
+  
 </div>
