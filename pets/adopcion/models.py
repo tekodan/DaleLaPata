@@ -71,7 +71,7 @@ class Relacion(models.Model):
         unique_together = ('usuario', 'mascota')
 
     def cambiar_adopcion(self):
-        tipor = TipoRelacion.objects.get(nombre='Adopción')
+        tipor = TipoRelacion.objects.get(nombre__contains='Adopc')
         self.tipo_relacion = tipor
         self.save()
 
