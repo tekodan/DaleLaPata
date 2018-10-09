@@ -243,12 +243,12 @@ DAYS_TO_STALE_REGISTER = config('DAYS_TO_STALE_REGISTER', default=90, cast=int)
 #SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY', default='')
 #SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET', default='')
 SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY', default='261980194398476')
-SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET', default='261980194398476')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET', default='e1c995e56b244853fedc03911379082c')
 
 SOCIAL_AUTH_TWITTER_KEY = config('SOCIAL_AUTH_TWITTER_KEY', default='')
 SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET', default='')
 
-FACEBOOK_SHARE_URL = 'https://www.facebook.com/sharer.php?u=http://cademeubicho.com/pets/{}/'
+FACEBOOK_SHARE_URL = 'https://www.facebook.com/sharer.php?u=http://dalelapata.narino.gov.co/pets/{}/'
 TWITTER_SHARE_URL = 'https://twitter.com/share?url=http://cademeubicho.com/pets/{}/'
 
 

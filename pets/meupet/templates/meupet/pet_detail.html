@@ -5,18 +5,30 @@
   <link rel="canonical" href="{{ pet_url }}"/>
   <meta name="description" content="{{ pet.description }}">
 
-  <meta property="og:title" content="{{ pet.name }} | Cadê meu Bicho?">
+<<<<<<< HEAD
+  <meta property="og:title" content="{{ pet.name }} | Dale La Pata">
+=======
+  <meta property="og:title" content="{{ pet.name }} | Dale la Pata?">
+>>>>>>> f9c2fe61fd870cc7d9cb4bec0b54945ba8f1b37a
   <meta property="og:description" content="{{ pet.description }}">
   <meta property="og:url" content="{{ pet_url }}">
   <meta property="og:image"
-        content="http://www.cademeubicho.com{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
-  <meta property="og:site_name" content="Cadê meu Bicho?">
+        content="http://dalelapata.narino.gov.co{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+<<<<<<< HEAD
+  <meta property="og:site_name" content="Dale La Pata">
+=======
+  <meta property="og:site_name" content="Dale la Pata">
+>>>>>>> f9c2fe61fd870cc7d9cb4bec0b54945ba8f1b37a
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ pet.name }} | Cadê meu Bicho?">
+  <meta name="twitter:title" content="{{ pet.name }} | Dale la Pata">
   <meta name="twitter:description" content="{{ pet.description }}">
   <meta name="twitter:image:src"
-        content="http://www.cademeubicho.com{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+<<<<<<< HEAD
+        content="http://www.dalelapata.narino.gov.co{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+=======
+        content="http://dalelapata.narino.gov.co{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+>>>>>>> f9c2fe61fd870cc7d9cb4bec0b54945ba8f1b37a
 {% endblock %}
 
 {% block title %}{{ pet.name }} - {{ pet.status.description }}{% endblock %}
@@ -51,10 +63,10 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="background-image:url('../../static/img/fondoheader.png')">
     <div class="col-md-5">
       <a href="{{ pet.profile_picture.url }}" data-lightbox="{{ pet.slug }}" data-title="{{ pet }}">
-        <img class="img-thumbnail" src="{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}"
+        <img class="img-thumbnail image-pet" src="{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}"
              alt="{{ pet }}"/>
       </a>
       {% if user == pet.owner %}
@@ -76,49 +88,61 @@
     </div>
 
     <div class="col-md-7">
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="-webkit-border-radius: 30px;-moz-border-radius: 30px;border-radius: 30px;">
         <div class="panel-body">
 
           {% if pet.chip_id %}
-            <p>
-                <strong>{% trans 'Numero Chip' %}:</strong><br/>
-                {{ pet.chip_id }}
-            </p>
+          <div class="row" style="margin:15px">
+          <div class="pet-botton col-md-4" >
+          <strong >{% trans 'Numero Chip' %}:</strong>
+          </div>
+          <div class="col-md-8">
+              {{ pet.chip_id }}
+            </div>
+          </div>
           {% endif %}
-          <p>
-            <strong>{% trans 'Descripción' %}:</strong><br/>
+          <div class="row" style="margin:15px">
+          <div class="pet-botton col-md-4" >
+            <strong>{% trans 'Descripción' %}:</strong>
+          </div>
+          <div class="col-md-8">
             {{ pet.description }}
-          </p>
-
-          <p>
-            <strong>{% trans 'Ciudad' %}:</strong><br/>
+          </div>
+        </div>
+        <div class="row" style="margin:15px">
+          <div class="pet-botton col-md-4">
+            <strong>{% trans 'Ciudad' %}:</strong>
+          </div>
+          <div class="col-md-8">
             {{ pet.city|title }}
-          </p>
+          </div>
+        </div>
 
           {% if pet.size %}
-            <p>
-              <strong>{% trans 'Tamaño' %}:</strong><br/>
+          <div class="row"  style="margin:15px">
+            <div class="pet-botton col-md-4">
+              <strong>{% trans 'Tamaño' %}:</strong>
+            </div>
+            <div class="col-md-8">
               {{ pet.get_size_display }}
-            </p>
+            </div>
+          </div>
           {% endif %}
 
           {% if pet.sex %}
-            <p>
-              <strong>{% trans 'Genero' %}:</strong><br/>
+          <div class="row" style="margin:15px">
+            <div class="pet-botton col-md-4">
+              <strong>{% trans 'Genero' %}:</strong>
+            </div>
+            <div class="col-md-8">
               {{ pet.get_sex_display }}
-            </p>
-          {% endif %}
-
-          {% if pet.is_found_or_adopted %}
-            <p>
-                <strong>{% trans 'Adoptada por' %}:</strong><br/>
-                {{ pet.get_adoptante_actual }}
-            </p>
+            </div>
+          </div>
           {% endif %}
 
           <p>
             <strong>{% trans 'Contacto' %}:</strong><br/>
-            <a href="{% url 'users:user_profile' pet.owner.id %}">{{pet.owner.fundacion.nombre_corto}} - {{ pet.owner.get_full_name }}</a>
+            <a href="{% url 'users:user_profile' pet.owner.id %}">{{pet.owner.fundacion.razon_social}} - {{ pet.owner.get_full_name }}</a>
             {% if pet.owner.facebook %} | <a href="{{ pet.owner.facebook }}">Facebook</a>{% endif %}
           </p>
 
@@ -131,7 +155,7 @@
               <img src="{% static 'img/twitter.png' %}" alt="Twitter"/>
             </a>
           </p>
-          
+
             <div class="pull-right">
               {% if not pet.status.final %}
                 <!-- <form action="{% url 'meupet:change_status' pet.id %}" method="post" class="form-inline"> -->
@@ -141,7 +165,7 @@
                   <input type="submit" class="btn btn-success" value="
                             {% if pet.status.code == 'Adopción' %}
                               {% trans 'Postularse' %}
-                            {% else %} 
+                            {% else %}
                               {% if pet.status.code == 'Extraviada' %}
                                 {% trans 'La encontre!' %}
                               {% endif %}
@@ -153,19 +177,20 @@
                 </form>
 
 
-              {% if user == pet.owner %}  
+              {% if user == pet.owner %}
               <a href="{% url 'meupet:edit' pet.id %}" class="btn btn-primary">{% trans 'Editar' %}</a>
               {% if not pet.status.final %}
                 <a href="{% url 'meupet:poster' pet.slug %}" class="btn btn-primary" >{% trans 'Generar poster' %}</a>
               {% endif %}
-              
+
 
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_pet">
                 {% trans 'ELiminar' %}
               </button>
               {% endif %}
-            </div>
+
           {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -177,7 +202,7 @@
           {% for photo in pet.photo_set.all %}
             <div class="col-md-3">
               <a href="{{ photo.image.url }}" data-lightbox="{{ pet.slug }}" data-title="{{ pet }}">
-                <img class="img-thumbnail" src="{{ photo.image|thumbnail_url:'pet_thumb' }}"
+                <img class="img-thumbnail image-pet" src="{{ photo.image|thumbnail_url:'pet_thumb' }}"
                      alt="{{ pet }}"/>
               </a>
             </div>

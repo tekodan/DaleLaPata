@@ -4,6 +4,54 @@
 {% load i18n crispy_forms_tags static %}
 
 {% block content %}
+<style type="text/css">
+    #super{
+      width: 100%;  
+      /*margin-left:auto*/
+    }
+    #main{
+      width: 75%; 
+      margin-left: 10%;
+    }
+    #cabecera{
+      text-align: center;
+      vertical-align: center;
+      font-weight: bold;
+        font-color:#ffffff;
+      font-family:"Arial";
+      font-size:12px;
+    }   
+    #titulo{
+      width: 60%;     
+    }
+    #fecha{
+      width: 20%;
+      text-align: left;
+    }
+    #logo{
+      width: 20%;
+      /*align-items: center; */
+    }
+    #nit{
+      /*width: 100%;*/
+    }
+    /* ------    ------*/
+    fieldset { 
+        display: inline-table;
+        font-size:11px;
+        border: 2px groove (internal value);
+    }
+    legend {
+      font-size:11px;
+      font-weight: bold;
+        font-color:#ffffff;
+      font-family:"Arial";
+      text-decoration: underline;
+    }
+    fieldset label{
+      text-decoration: underline;
+    }
+  </style>
 <div class="modal fade" id="delete_pet" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -17,7 +65,56 @@
 
             <div class="modal-body" id="modal-c">
                 <!--  ----------------------------------------------------------------------- -->
-                
+                <div id="super" class="col-xs-12 .col-sm-6 .col-lg-8">
+                  <div id="main" class="table-responsive">
+                    <!-- CABECERA -->
+                    <table border=1 class="table" id="cabecera">
+                      <tr>
+                       <td id="fecha" rowspan="2">Fecha</td>
+                       <td id="titulo">CONTRATO LEGAL DE ADOPCIÓN DE UN ANIMAL DE COMPAÑÍA {{relacion.mascota.fundacion.nombre_corto}}</td>
+                       <td id="logo" rowspan="2">Logo</td>
+                     </tr>
+                     <tr>
+                      <td  id="nit">{{relacion.mascota.fundacion.tipo_identificacion}} :{{relacion.mascota.fundacion.num_identificacion}}</td>
+                    </tr>
+                  </table>
+                  <!-- CABECERA -->
+                  <!-- ADOPTANTE -->
+                  <table border=1 class="table">
+                    <tr>
+                     <td id="">Nombres y apellidos</td>
+                     <td id="">Documento</td>
+                     <td id="">Numero</td>
+                   </tr>
+                 </table>
+                 <!-- ADOPTANTE -->
+                 <fieldset>
+                  <legend>DATOS DEL ADOPTANTE</legend>
+                  NOMBRES Y APELLIDOS: <label>{{relacion.usuario.nombre_completo}}</label>
+                  {{relacion.usuario.tipo_identificacion}}: <label>{{relacion.usuario.num_identificacion}}</label>
+                  DIRECCIÓN: <label>{{relacion.usuario.direccion}}</label>
+                  MUNICIPIO: <label>{{relacion.usuario.city}}</label>
+                  DEPARTAMENTO: <label>{{relacion.usuario.state}}</label>
+                  PAIS: <label>COLOMBIA</label>
+                  CONTACTO: <label>{{relacion.usuario.phone}}</label>
+                  E-MAIL: <label>{{relacion.usuario.email}}</label>
+                </fieldset>
+
+                <fieldset>
+                  <legend>DATOS DEL ADOPTADO</legend>
+                  NOMBRE DE LA MASCOTA: <label>{{relacion.mascota.name}}</label>
+                  NUMERO DE CHIP: <label>{{relacion.mascota.chip}}</label>
+                  COLOR: <label>{{relacion.usuario.direccion}}</label>
+                  PESO: <label>{{relacion.usuario.city}}</label>
+                  EDAD: <label>{{relacion.usuario.state}}</label>
+                  ESPECIE: <label>COLOMBIA</label>
+                  SEXO: <label>{{relacion.usuario.phone}}</label>
+                  RAZA: <label>{{relacion.usuario.email}}</label>
+                  CONDICIÓN CORPORAL: <label>{{relacion.usuario.email}}</label>
+                </fieldset>
+
+              </div>
+            </div>
                 <!-- ----------------------------------------------------------------------- -->
             </div>
 
