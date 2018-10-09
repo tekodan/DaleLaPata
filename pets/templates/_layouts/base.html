@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/pets.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/lightbox.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-
-    <!-- Librerias Dropdown -->
-    <link rel="stylesheet" href="{% static 'css/jquery.dropdown.min.css' %}"/>
   {% endcompress %}
   {% block metatags %}{% endblock %}
   {% if not debug %}
@@ -38,29 +35,29 @@
   {% endif %}
 </head>
 <body>
-<div class="navbar {% block extra_navbar_css %}{% endblock %}" role="navigation">
+<div class="navbar {% block extra_navbar_css %}{% endblock %}" role="navigation" >
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse"
-              data-target=".navbar-collapse">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"    data-target=".navbar-collapse">
         <span class="sr-only">{% trans 'Toggle navigation' %}</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="{% url 'users:f_list' %}">
-        <img src="{% static 'img/icono.png' %}" width="150px" height="60px" style="position:relative; top:20px;"> 
-        
+      <a href="{% url 'common:homepage' %}">
+        <img src="{% static 'img/dalelapatalog.png' %}" width="150px" height="120px" style="position:relative;z-index: 1; top:20px;">
+
+
         {% if user.fundacion %}
         <div style="position:relative; top:17px; background-color: white; border-color: black; text-align: center;">
-          <p width="150px" height="60px" style="color: black;">{{ user.fundacion.nombre_corto }}</p>   
+          <p width="150px" height="60px" style="color: black;">{{ user.fundacion.razon_social }}</p>
         </div>
         {% endif %}
-          
+
       </a>
-    
+
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" >
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'meupet:index' %}">{% trans 'Mascotas' %}</a></li>
         <li class="hidden-sm hidden-md hidden-lg">
@@ -82,6 +79,7 @@
           </ul>
         </li>
         <li><a href="{% url 'meupet:register' %}">{% trans 'Registrar Mascota' %}</a></li>
+        <li><a href="https://angela1033.typeform.com/to/Yqt5FN">{% trans 'Amig@s4Patas' %}</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'users:profile' %}">{% trans 'Perfil' %}</a></li>
           <li><a href="{% url 'users:logout' %}">{% trans 'Cerrar Sesión' %}</a></li>
@@ -95,15 +93,14 @@
     </div>
   </div>
 </div>
-
 {% block heading %}
   <div class="heading">
     <h1 class="title-text text-center">{% block title %}{% endblock %}</h1>
   </div>
 {% endblock %}
-
 {% block page %}
-  <div class="container">
+<div style="background-image:url('../../static/img/fondoheader.png'); padding: 25px">
+  <div class="container" >
     <div class="row">
       {% if messages %}
         <div class="col-md-12">
@@ -140,13 +137,14 @@
           </div>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-10" >
           {% block content %}
           {% endblock content %}
         </div>
       {% endblock body %}
     </div>
   </div>
+</div>
 {% endblock %}
 
 <div class="footer hidden-print">
@@ -166,40 +164,29 @@
   <div class="footer-body">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6 text-center" style="font-family:boogaloo">
+        <h2 class="text-center">Nuestros numeros</h2>
+    <div class="row">
+      <div class="col-md-4 rounded-circle" style="background:white;border-radius:10px">
+        <p class="site-stats"  style="color:black">{{ pets_count }} Mascotas</p>
+        </div>
+      <div class="col-md-4">
+          <img src="{% static 'img/dalelapatalog.png' %}" width="150px" height="120px" style="position:relative;z-index: 1; top:20px;">
+      </div>
+
+      <div class="col-md-4 rounded-circle"  style="background:white;border-radius:10px" >
+        <p class="site-stats" style="color:black">{{ users_count }} Usuarios </p>
+      </div>
+    </div>
+        </div>
+        <div class="col-md-6">
           <h4 class="title-text">{% trans 'Acerca' %}</h4>
 
           <p>{% trans 'EL proposito de dale la pata es mejorar los procesos de adopción, pero el proposito principal es el de llenar de amor los hogares de Nariño :)' %}</p>
-        </div>
-        <div class="col-md-4 text-center">
-          <h4 class="title-text">{% trans 'Contact' %}</h4>
+  <img class="img-responsive" src="{% static 'img/logotic.png' %}" alt="DigitalOcean logo">
 
-          <ul class="list-unstyled">
-            <li>
-              <a href="mailto:contato@gobernacionnarino.com">contato@gobernacionnarino.com</a>
-            </li>
-          </ul>
+        </div>
 
-          <ul class="list-unstyled">
-            <li>
-              <div class="apoia-button">
-                <a href="https://apoia.se/cademeubicho" target="_blank" rel="noreferrer noopener" class="apoia-link">
-                  Apoyan este site <img class="apoia-img" src="{% static 'img/apoiase_white.png' %}" alt="Logo do APOIA.se"/>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <div class="fb-page" data-href="https://www.facebook.com/kdmeubicho/" data-small-header="true"
-               data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
-            <div class="fb-xfbml-parse-ignore">
-              <blockquote cite="https://www.facebook.com/kdmeubicho/">
-                <a href="https://www.facebook.com/kdmeubicho/">DaleLaPata</a>
-              </blockquote>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -210,17 +197,6 @@
   <script src="{% static 'js/lightbox.js' %}"></script>
   <script src="{% static 'js/matchMedia.js' %}"></script>
   <script src="{% static 'js/pets.js' %}"></script>
-
-  <!-- Js dropdown -->
-  <script src="{% static 'js/jquery.dropdown.min.js' %}"></script>
-  <script type="text/javascript">
-  $('.demo').dropdown({
-         limitCount: 5,
-      searchable: false
-      });
-  </script>
-  <!-- -->
-
   {% if not debug %}
     <div id="fb-root"></div>
     <script>(function (d, s, id) {
