@@ -5,18 +5,18 @@
   <link rel="canonical" href="{{ pet_url }}"/>
   <meta name="description" content="{{ pet.description }}">
 
-  <meta property="og:title" content="{{ pet.name }} | Cadê meu Bicho?">
+  <meta property="og:title" content="{{ pet.name }} | Dale La Pata">
   <meta property="og:description" content="{{ pet.description }}">
   <meta property="og:url" content="{{ pet_url }}">
   <meta property="og:image"
-        content="http://www.cademeubicho.com{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
-  <meta property="og:site_name" content="Cadê meu Bicho?">
+        content="http://dalelapata.narino.gov.co{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+  <meta property="og:site_name" content="Dale La Pata">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ pet.name }} | Cadê meu Bicho?">
   <meta name="twitter:description" content="{{ pet.description }}">
   <meta name="twitter:image:src"
-        content="http://www.cademeubicho.com{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
+        content="http://www.dalelapata.narino.gov.co{{ pet.profile_picture|thumbnail_url:'pet_thumb' }}">
 {% endblock %}
 
 {% block title %}{{ pet.name }} - {{ pet.status.description }}{% endblock %}

@@ -74,7 +74,7 @@ class PetForm(forms.ModelForm):
     def clean_profile_picture(self):
         img = self.cleaned_data.get('profile_picture', False)
         if img and img.size > 8 * 1024 * 1024:
-            raise forms.ValidationError(_('Image is larger than the maximum size of 8MB'))
+            raise forms.ValidationError(_('Tamaño de imagen mayor que 8MB'))
         return img
 
     def clean_name(self):
